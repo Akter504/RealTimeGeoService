@@ -1,0 +1,6 @@
+rootProject.name = 'geo-system'
+
+include 'geo-common'
+include 'geo-ingest'
+include 'geo-api'
+include 'geo-processor'

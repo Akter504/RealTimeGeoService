@@ -1,0 +1,31 @@
+plugins {
+	id 'java'
+	id 'org.springframework.boot'
+	id 'io.spring.dependency-management'
+}
+
+description = 'Geo entry'
+
+
+configurations {
+	compileOnly {
+		extendsFrom annotationProcessor
+	}
+}
+
+dependencies {
+	implementation project(':geo-common')
+	implementation 'org.springframework.boot:spring-boot-starter-kafka'
+	implementation 'org.springframework.boot:spring-boot-starter-webmvc'
+	testImplementation 'org.springframework.boot:spring-boot-starter-kafka-test'
+	testImplementation 'org.springframework.boot:spring-boot-starter-webmvc-test'
+	testRuntimeOnly 'org.junit.platform:junit-platform-launcher'
+}
+
+tasks.named('test') {
+	useJUnitPlatform()
+}
+
+bootJar {
+	archiveFileName = 'geo-ingest.jar'
+}
