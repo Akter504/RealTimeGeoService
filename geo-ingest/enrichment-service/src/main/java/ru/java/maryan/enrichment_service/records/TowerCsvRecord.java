@@ -1,9 +1,14 @@
 package ru.java.maryan.enrichment_service.records;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.opencsv.bean.CsvBindByName;
-import lombok.Data;
+import lombok.Getter;
+import lombok.RequiredArgsConstructor;
+import lombok.Setter;
 
-@Data
+@RequiredArgsConstructor
+@Setter
+@Getter
 public class TowerCsvRecord {
     @CsvBindByName(column = "radio")
     private String rat;
@@ -48,6 +53,7 @@ public class TowerCsvRecord {
     @CsvBindByName(column = "averageSignal")
     private Integer averageSignal;
 
+    @JsonIgnore
     public String getUniqueKey() {
         return mcc + "-" + mnc + "-" + lac + "-" + cellId;
     }

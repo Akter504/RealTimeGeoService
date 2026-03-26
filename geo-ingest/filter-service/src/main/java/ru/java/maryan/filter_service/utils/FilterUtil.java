@@ -16,9 +16,8 @@ public final class FilterUtil {
 
     public static boolean filter(BaseStationMessage msg) {
         if (!checkEventType(msg.eventType())) return false;
-        if (!checkImsi(msg.imsi())) return false;
+        if (!checkImsiAndMsisdn(msg.imsi(), msg.msisdn())) return false;
         if (!checkImei(msg.imei())) return false;
-        if (!checkMsisdn(msg.msisdn())) return false;
         if (!checkCellIdWithLac(msg.cellId(), msg.lac())) return false;
         if (!checkRat(msg.rat(), msg.signalStrength())) return false;
         return checkTimestamp(msg.timestamp());
@@ -31,11 +30,11 @@ public final class FilterUtil {
         }
 
         Instant now = Instant.now();
-        if (timestamp.isBefore(now.minus(Duration.ofHours(24)))) {
+        if (timestamp.isBefore(now.minus(Duration.ofHours(1)))) {
             log.warn("Timestamp too old: {}", timestamp);
             return false;
         }
-        if (timestamp.isAfter(now.plus(Duration.ofMinutes(5)))) {
+        if (timestamp.isAfter(now)) {
             log.warn("Timestamp from future: {}", timestamp);
             return false;
         }
@@ -65,8 +64,7 @@ public final class FilterUtil {
 
         return true;
     }
-
-    // ToDo: добавить проверку, что cellId и lac существуют в системе.
+    
     private static final String DIGITS_REGEX = "\\d+";
     private static boolean checkCellIdWithLac(String cellId, String lac) {
         if (cellId == null || cellId.isBlank()) {
@@ -93,21 +91,47 @@ public final class FilterUtil {
     }
 
     private static final String IMSI_REGEX = "\\d{15}";
+    private static final String MSISDN_REGEX = "\\D";
     private static final String MCC_FOR_RUSSIA = "250";
-    private static boolean checkImsi(String imsi) {
+    private static final int MIN_MSISDN_LENGTH = 10;
+    private static final int MAX_MSISDN_LENGTH = 15;
+    private static boolean checkImsiAndMsisdn(String imsi, String msisdn) {
+        return isValidImsi(imsi) || isValidMsisdn(msisdn);
+    }
+
+    private static boolean isValidImsi(String imsi) {
         if (imsi == null || imsi.isBlank()) {
-            log.warn("Imsi is empty or is blank: {}", imsi);
+            log.warn("IMSI is empty or blank");
             return false;
         }
+
         if (!imsi.matches(IMSI_REGEX)) {
-            log.warn("Wrong format for Imsi (need 15 digits): {}", imsi);
+            log.warn("Wrong format for IMSI (need 15 digits): {}", imsi);
             return false;
         }
-        // ToDo: При масштабировании убрать
+
+        // TODO: При масштабировании убрать
         if (!imsi.startsWith(MCC_FOR_RUSSIA)) {
             log.warn("Geo-service does not support non-Russian subscribers: {}", imsi);
             return false;
         }
+
+        return true;
+    }
+
+    private static boolean isValidMsisdn(String msisdn) {
+        if (msisdn == null || msisdn.isBlank()) {
+            log.warn("MSISDN is empty or blank");
+            return false;
+        }
+
+        String cleanMsisdn = msisdn.replaceAll(MSISDN_REGEX, "");
+        if (cleanMsisdn.length() < MIN_MSISDN_LENGTH || cleanMsisdn.length() > MAX_MSISDN_LENGTH) {
+            log.warn("MSISDN wrong length (should be {}-{} digits): {}",
+                    MIN_MSISDN_LENGTH, MAX_MSISDN_LENGTH, msisdn);
+            return false;
+        }
+
         return true;
     }
 
@@ -119,22 +143,6 @@ public final class FilterUtil {
         }
         if (!imei.matches(IMEI_REGEX)) {
             log.warn("Wrong format for Imei (need 15-17 digits): {}", imei);
-            return false;
-        }
-        return true;
-    }
-
-    private static final String MSISDN_REGEX = "\\D";
-    private static boolean checkMsisdn(String msisdn) {
-        if (msisdn == null || msisdn.isBlank()) {
-            log.warn("Msisdn is empty or blank");
-            return false;
-        }
-
-        String cleanMsisdn = msisdn.replaceAll(MSISDN_REGEX, "");
-
-        if (cleanMsisdn.length() < 10 || cleanMsisdn.length() > 15) {
-            log.warn("Msisdn wrong length (should be 10-15 digits): {}", msisdn);
             return false;
         }
         return true;

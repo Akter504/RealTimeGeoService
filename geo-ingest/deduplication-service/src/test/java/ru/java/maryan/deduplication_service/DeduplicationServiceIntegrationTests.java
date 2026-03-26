@@ -82,7 +82,7 @@ class DeduplicationServiceIntegrationTests {
 
     @BeforeEach
     void setUp() throws ExecutionException, InterruptedException, TimeoutException {
-        redisTemplate.getConnectionFactory().getConnection().serverCommands().flushAll();
+        //redisTemplate.getConnectionFactory().getConnection().serverCommands().flushAll();
         adminClient = AdminClient.create(Map.of(
                 AdminClientConfig.BOOTSTRAP_SERVERS_CONFIG, kafka.getBootstrapServers()
         ));
@@ -175,6 +175,39 @@ class DeduplicationServiceIntegrationTests {
         assertThat(secondRecords.isEmpty()).isTrue();
 
         int keyForOriginal = redisTemplate.keys("*" + original.imsi() + "*").size();
+
+        assertThat(keyForOriginal).isEqualTo(1);
+    }
+
+    @Test
+    void shouldFilterOutDuplicateMessageWithImsiInDict() {
+        BaseStationMessage original = new BaseStationMessage(
+                "250029999999999", "356759047890123", "79991234567",
+                "7202362", "UMTS", "sys", "5301", 10L, 10L, "ATTACH", Instant.now(), -50
+        );
+
+        BaseStationMessage duplicate = new BaseStationMessage(
+                "", "356759047890123", "79991234567",
+                "7202362", "UMTS", "sys", "5301", 10L, 10L, "ATTACH", Instant.now(), -50
+        );
+
+        redisTemplate.opsForValue().set("MSISDN:79991234567", "250029999999999");
+        redisTemplate.opsForValue().set("IMSI:250029999999999", "79991234567");
+
+        sender.send(original, TOPIC_IN);
+
+        ConsumerRecords<String, BaseStationMessage> firstRecords =
+                KafkaTestUtils.getRecords(testConsumer, Duration.ofSeconds(10), 1);
+        assertThat(firstRecords.count()).isEqualTo(1);
+
+        sender.send(duplicate, TOPIC_IN);
+
+        ConsumerRecords<String, BaseStationMessage> secondRecords =
+                KafkaTestUtils.getRecords(testConsumer, Duration.ofSeconds(3));
+
+        assertThat(secondRecords.isEmpty()).isTrue();
+
+        int keyForOriginal = redisTemplate.keys("dedupe:" + original.imsi() + "*").size();
 
         assertThat(keyForOriginal).isEqualTo(1);
     }

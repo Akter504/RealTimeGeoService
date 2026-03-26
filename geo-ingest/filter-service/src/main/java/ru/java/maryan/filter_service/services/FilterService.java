@@ -11,6 +11,8 @@ import ru.java.maryan.geo_common.services.MessageHandler;
 import ru.java.maryan.geo_common.services.MessageSender;
 import ru.java.maryan.filter_service.utils.FilterUtil;
 
+import static ru.java.maryan.geo_common.constants.KafkaConstants.TRACE_ID;
+
 @Slf4j
 @Component
 public class FilterService implements MessageHandler<BaseStationMessage> {
@@ -28,9 +30,7 @@ public class FilterService implements MessageHandler<BaseStationMessage> {
     @Override
     @KafkaListener(topics = "${spring.kafka.consumer.topic-in}")
     public void handle(BaseStationMessage message) {
-        String imsi = message.imsi() != null ? message.imsi() : "UNKNOWN";
-
-        try (var ignored = MDC.putCloseable("imsi", imsi)) {
+        try (var ignored = MDC.putCloseable(TRACE_ID, message.getTraceId())) {
             log.debug("Received raw message: {}", message.eventType());
 
             if (FilterUtil.filter(message)) {

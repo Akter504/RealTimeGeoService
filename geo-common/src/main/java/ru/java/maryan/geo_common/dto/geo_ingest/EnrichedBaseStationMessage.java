@@ -22,7 +22,7 @@ public record EnrichedBaseStationMessage(
 
 //        Long h3Index,
 
-        //String regionCode,
+        //String regionCode, // На подумать (микро-регионы)
 
         String deviceVendor,
         String deviceModel,

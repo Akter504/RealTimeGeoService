@@ -11,6 +11,8 @@ import ru.java.maryan.geo_common.dto.geo_ingest.BaseStationMessage;
 import ru.java.maryan.geo_common.services.MessageHandler;
 import ru.java.maryan.geo_common.services.MessageSender;
 
+import static ru.java.maryan.geo_common.constants.KafkaConstants.TRACE_ID;
+
 @Slf4j
 @Component
 public class DeduplicationService implements MessageHandler<BaseStationMessage> {
@@ -31,9 +33,7 @@ public class DeduplicationService implements MessageHandler<BaseStationMessage> 
     @Override
     @KafkaListener(topics = "${spring.kafka.consumer.topic-in}")
     public void handle(BaseStationMessage message) {
-        String imsi = message.imsi() != null ? message.imsi() : "UNKNOWN";
-
-        try (var ignored = MDC.putCloseable("imsi", imsi)) {
+        try (var ignored = MDC.putCloseable(TRACE_ID, message.getTraceId())) {
             log.debug("Checking message for duplicates...");
 
             if (storage.save(message)) {

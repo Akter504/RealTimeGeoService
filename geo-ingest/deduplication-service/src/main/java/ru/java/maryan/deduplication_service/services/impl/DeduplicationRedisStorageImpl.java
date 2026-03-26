@@ -10,6 +10,9 @@ import ru.java.maryan.geo_common.dto.geo_ingest.BaseStationMessage;
 
 import java.time.Duration;
 
+import static ru.java.maryan.geo_common.constants.StationMessage.COLON;
+import static ru.java.maryan.geo_common.constants.StationMessage.MSISDN;
+
 @Slf4j
 @Component
 public class DeduplicationRedisStorageImpl implements DeduplicationRedisStorage<BaseStationMessage> {
@@ -24,13 +27,12 @@ public class DeduplicationRedisStorageImpl implements DeduplicationRedisStorage<
         this.redisTemplate = redisTemplate;
     }
 
-    private static final String KEY_FORMAT = "dedupe:%s:%s:%s:%s";
+    private static final String KEY_FORMAT = "dedupe:%s:%s:%s";
 
     @Override
     public boolean save(BaseStationMessage message) {
         String key = String.format(KEY_FORMAT,
-                message.imsi(),
-                message.imei(),
+                resolveUniversalId(message),
                 message.cellId(),
                 message.lac()
         );
@@ -42,6 +44,22 @@ public class DeduplicationRedisStorageImpl implements DeduplicationRedisStorage<
         redisTemplate.opsForValue().set(key, key, ttl);
         log.debug("Saved new key to Redis: {}", key);
         return true;
+    }
+
+    private String resolveUniversalId(BaseStationMessage msg) {
+        String imsi = msg.imsi();
+        if (imsi != null && !imsi.isBlank()) {
+            return imsi;
+        }
+
+        String msisdn = msg.msisdn();
+        imsi = redisTemplate.opsForValue().get(MSISDN + COLON + msisdn);
+        if (imsi != null) {
+            log.debug("Resolved MSISDN {} to IMSI {}", msisdn, imsi);
+            return imsi;
+        }
+        log.warn("Not found IMSI from dict, MSISDN: {}", msisdn);
+        return msisdn;
     }
 
     private boolean isDuplicate(String key) {

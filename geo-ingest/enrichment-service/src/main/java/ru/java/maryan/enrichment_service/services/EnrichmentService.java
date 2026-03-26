@@ -1,9 +1,11 @@
 package ru.java.maryan.enrichment_service.services;
 
+import com.fasterxml.jackson.databind.ObjectMapper;
 import lombok.extern.slf4j.Slf4j;
 import org.slf4j.MDC;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
+import org.springframework.data.redis.core.StringRedisTemplate;
 import org.springframework.kafka.annotation.KafkaListener;
 import org.springframework.stereotype.Service;
 import ru.java.maryan.enrichment_service.records.TacCsvRecord;
@@ -13,28 +15,36 @@ import ru.java.maryan.geo_common.dto.geo_ingest.EnrichedBaseStationMessage;
 import ru.java.maryan.geo_common.services.MessageHandler;
 import ru.java.maryan.geo_common.services.MessageSender;
 
+import static ru.java.maryan.geo_common.constants.KafkaConstants.*;
+import static ru.java.maryan.geo_common.constants.StationMessage.*;
+
 @Slf4j
 @Service
 public class EnrichmentService implements MessageHandler<BaseStationMessage> {
 
     private final MessageSender<EnrichedBaseStationMessage> sender;
     private final CellTowerService cellTowerService;
+    private final StringRedisTemplate redisTemplate;
+    private final ObjectMapper objectMapper;
 
     @Value("${spring.kafka.consumer.topic-out}")
     private String outputTopic;
 
     @Autowired
-    public EnrichmentService(MessageSender<EnrichedBaseStationMessage> sender, CellTowerService cellTowerService) {
+    public EnrichmentService(MessageSender<EnrichedBaseStationMessage> sender,
+                             CellTowerService cellTowerService,
+                             StringRedisTemplate redisTemplate,
+                             ObjectMapper objectMapper) {
         this.sender = sender;
         this.cellTowerService = cellTowerService;
+        this.redisTemplate = redisTemplate;
+        this.objectMapper = objectMapper;
     }
 
     @Override
     @KafkaListener(topics = "${spring.kafka.consumer.topic-in}")
     public void handle(BaseStationMessage message) {
-        String imsi = message.imsi() != null ? message.imsi() : "UNKNOWN";
-
-        try (var ignored = MDC.putCloseable("imsi", imsi)) {
+        try (var ignored = MDC.putCloseable(TRACE_ID, message.getTraceId())) {
             log.debug("Starting enrichment process...");
 
             EnrichedBaseStationMessage enrichedMessage = enrich(message);
@@ -43,16 +53,24 @@ public class EnrichmentService implements MessageHandler<BaseStationMessage> {
                         enrichedMessage.deviceModel(), enrichedMessage.latitude(), enrichedMessage.longitude());
                 sender.send(enrichedMessage, outputTopic);
             } else {
-                log.warn("Failed to enrich message. Dropping.");
+                log.warn("Failed to enrich message. The message has been sent to the deferred queue.");
             }
         }
     }
 
     public EnrichedBaseStationMessage enrich(BaseStationMessage msg) {
-        String key = createKey(msg);
+        String imsi = resolveImsi(msg);
+        String msisdn = resolveMsisdn(msg);
+        if (imsi == null || msisdn == null) {
+            postponeMessage(msg);
+            return null;
+        }
+
+        String key = createKey(imsi, msg.lac(), msg.cellId());
         TowerCsvRecord towerCsvRecord = cellTowerService.findTower(key);
         if (towerCsvRecord == null) {
             log.warn("Tower not found in dictionary for key: {}", key);
+            postponeMessage(msg);
             return null;
         }
 
@@ -60,20 +78,65 @@ public class EnrichmentService implements MessageHandler<BaseStationMessage> {
         TacCsvRecord tacCsvRecord = cellTowerService.findTac(tac);
         if (tacCsvRecord == null) {
             log.warn("Device TAC not found in dictionary: {}", tac);
+            postponeMessage(msg);
             return null;
         }
-        return createEnrichedMessage(msg, towerCsvRecord, tacCsvRecord);
+        return createEnrichedMessage(msg, towerCsvRecord, tacCsvRecord, imsi, msisdn);
     }
+
+    private void postponeMessage(BaseStationMessage msg) {
+        try {
+            String json = objectMapper.writeValueAsString(msg);
+            redisTemplate.opsForList().rightPush(UNRESOLVED_QUEUE, json);
+        } catch (Exception e) {
+            log.error("Failed to postpone message", e);
+        }
+    }
+
+    private String resolveImsi(BaseStationMessage msg) {
+        if (msg.imsi() != null && !msg.imsi().isBlank()) {
+            return msg.imsi();
+        }
+
+        if (msg.msisdn() != null && !msg.msisdn().isBlank()) {
+            String imsiFromDict = redisTemplate.opsForValue().get(MSISDN + COLON + msg.msisdn());
+            if (imsiFromDict != null) {
+                log.debug("Restored IMSI {} from MSISDN {}", imsiFromDict, msg.msisdn());
+            }
+            return imsiFromDict;
+        }
+        log.warn("Cannot resolve IMSI for MSISDN: {}. Sending to delayed queue.", msg.msisdn());
+        return null;
+    }
+
+    private String resolveMsisdn(BaseStationMessage msg) {
+        if (msg.msisdn() != null && !msg.msisdn().isBlank()) {
+            return msg.msisdn();
+        }
+
+        if (msg.imsi() != null && !msg.imsi().isBlank()) {
+            String msisdnFromDict = redisTemplate.opsForValue().get(IMSI + COLON + msg.imsi());
+            if (msisdnFromDict != null) {
+                log.debug("Restored MSISDN {} from IMSI {}", msisdnFromDict, msg.imsi());
+            }
+            return msisdnFromDict;
+        }
+        log.warn("Cannot resolve MSISDN for Imsi: {}. Sending to delayed queue.", msg.imsi());
+        return null;
+    }
+
 
     private EnrichedBaseStationMessage createEnrichedMessage(BaseStationMessage msg,
                                                              TowerCsvRecord tower,
-                                                             TacCsvRecord device) {
+                                                             TacCsvRecord device,
+                                                             String imsi,
+                                                             String msisdn) {
         return new EnrichedBaseStationMessage(
-                msg.msisdn(),
-                msg.imsi(),
+                msisdn,
+                imsi,
                 msg.imei(),
-                extractMccFromImsi(msg.imsi()),
-                extractMncFromImsi(msg.imsi()),
+                extractMccFromImsi(imsi),
+                extractMncFromImsi(imsi),
                 msg.lac(),
                 msg.rat(),
                 Long.parseLong(msg.cellId()),
@@ -92,18 +155,17 @@ public class EnrichmentService implements MessageHandler<BaseStationMessage> {
         );
     }
 
-    private String createKey(BaseStationMessage msg) {
-        String imsi = msg.imsi();
+    private String createKey(String imsi, String lac, String cellId) {
         return String.format("%s-%s-%s-%s",
                 extractMccFromImsi(imsi),
                 extractMncFromImsi(imsi),
-                msg.lac(),
-                msg.cellId()
+                lac,
+                cellId
         );
     }
 
     private String extractTacFromImei(String imei) {
-        return imei.substring(0, 8);
+        return TAC + COLON + imei.substring(0, 8);
     }
 
     private String extractMccFromImsi(String imsi) {

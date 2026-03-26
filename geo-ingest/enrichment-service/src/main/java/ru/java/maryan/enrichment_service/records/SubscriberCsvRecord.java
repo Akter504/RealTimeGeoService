@@ -8,13 +8,10 @@ import lombok.Setter;
 @RequiredArgsConstructor
 @Setter
 @Getter
-public class TacCsvRecord {
-    @CsvBindByName(column = "tac")
-    private Integer tac;
+public class SubscriberCsvRecord {
+    @CsvBindByName(column = "imsi")
+    private String imsi;
 
-    @CsvBindByName(column = "company")
-    private String company;
-
-    @CsvBindByName(column = "name")
-    private String name;
+    @CsvBindByName(column = "msisdn")
+    private String msisdn;
 }

@@ -1,5 +1,6 @@
 package ru.java.maryan.enrichment_service;
 
+import com.redis.testcontainers.RedisContainer;
 import org.apache.kafka.clients.admin.AdminClient;
 import org.apache.kafka.clients.admin.AdminClientConfig;
 import org.apache.kafka.clients.admin.NewTopic;
@@ -12,6 +13,7 @@ import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
+import org.springframework.data.redis.core.StringRedisTemplate;
 import org.springframework.kafka.core.DefaultKafkaConsumerFactory;
 import org.springframework.kafka.support.serializer.JacksonJsonDeserializer;
 import org.springframework.kafka.test.utils.KafkaTestUtils;
@@ -46,6 +48,11 @@ class EnrichmentServiceIntegrationTests {
             DockerImageName.parse("apache/kafka:3.7.0")
     );
 
+    @Container
+    static final RedisContainer redis = new RedisContainer(
+            DockerImageName.parse("redis:7-alpine")
+    );
+
     private static final String TOPIC_IN = "deduplication-stations";
     private static final String TOPIC_OUT = "enrichment-stations";
 
@@ -56,15 +63,16 @@ class EnrichmentServiceIntegrationTests {
         registry.add("spring.kafka.consumer.topic-out", () -> TOPIC_OUT);
         registry.add("spring.kafka.consumer.group-id", () -> "test-enrich-group");
 
-
-        registry.add("spring.kafka.producer.value-serializer", () -> "org.springframework.kafka.support.serializer.JacksonJsonSerializer");
-
-
         registry.add("spring.kafka.consumer.value-deserializer", () -> "org.springframework.kafka.support.serializer.JacksonJsonDeserializer");
         registry.add("spring.kafka.consumer.properties.spring.json.trusted.packages", () -> "*");
+        registry.add("spring.kafka.producer.value-serializer", () -> "org.springframework.kafka.support.serializer.JacksonJsonSerializer");
+
+        registry.add("spring.data.redis.host", redis::getHost);
+        registry.add("spring.data.redis.port", redis::getFirstMappedPort);
 
         registry.add("celltower.towers-file", () -> "test-tower.csv");
         registry.add("celltower.tac-file", () -> "test-tac.csv");
+        registry.add("celltower.subscribers-file", () -> "test-subscribers.csv");
 
         registry.add("logging.pattern.console",
                 () -> "%d{yyyy-MM-dd HH:mm:ss.SSS} %-5level [%X{imsi}] [%thread] %logger{36} - %msg%n");
@@ -77,8 +85,12 @@ class EnrichmentServiceIntegrationTests {
 
     private Consumer<String, EnrichedBaseStationMessage> testConsumer;
 
+    @Autowired
+    private StringRedisTemplate redisTemplate;
+
     @BeforeEach
     void setUp() throws ExecutionException, InterruptedException, TimeoutException {
+        //redisTemplate.getConnectionFactory().getConnection().serverCommands().flushAll();
         adminClient = AdminClient.create(Map.of(
                 AdminClientConfig.BOOTSTRAP_SERVERS_CONFIG, kafka.getBootstrapServers()
         ));
@@ -139,7 +151,6 @@ class EnrichmentServiceIntegrationTests {
         assertThat(enriched.longitude()).isEqualTo(31.564);
         assertThat(enriched.deviceVendor()).isEqualTo("Oppo");
         assertThat(enriched.deviceModel()).isEqualTo("N1");
-        System.out.printf("Received enriched message: %s", enriched);
     }
 
     @Test
@@ -165,6 +176,67 @@ class EnrichmentServiceIntegrationTests {
         );
 
         sender.send(unknownTacMsg, TOPIC_IN);
+
+        ConsumerRecords<String, EnrichedBaseStationMessage> records =
+                KafkaTestUtils.getRecords(testConsumer, Duration.ofSeconds(3));
+
+        assertThat(records.isEmpty()).isTrue();
+    }
+
+    @Test
+    void shouldEnrichMessageIfImsiInDict() {
+        BaseStationMessage msgWithoutImsi = new BaseStationMessage(
+                "", "356759047890123", "79991234567",
+                "7202362", "UMTS", "sys", "5301", 10L, 10L, "ATTACH", Instant.now(), -50
+        );
+
+        sender.send(msgWithoutImsi, TOPIC_IN);
+
+        ConsumerRecords<String, EnrichedBaseStationMessage> records =
+                KafkaTestUtils.getRecords(testConsumer, Duration.ofSeconds(10));
+
+        assertThat(records.count()).isEqualTo(1);
+
+        EnrichedBaseStationMessage enriched = records.iterator().next().value();
+
+        assertThat(enriched.imsi()).isEqualTo("250029999999999");
+        assertThat(enriched.latitude()).isEqualTo(59.0108);
+        assertThat(enriched.longitude()).isEqualTo(31.564);
+        assertThat(enriched.deviceVendor()).isEqualTo("Oppo");
+        assertThat(enriched.deviceModel()).isEqualTo("N1");
+    }
+
+    @Test
+    void shouldEnrichMessageIfMsisdnInDict() {
+        BaseStationMessage msgWithoutMsisdn = new BaseStationMessage(
+                "250029999999999", "356759047890123", "",
+                "7202362", "UMTS", "sys", "5301", 10L, 10L, "ATTACH", Instant.now(), -50
+        );
+
+        sender.send(msgWithoutMsisdn, TOPIC_IN);
+
+        ConsumerRecords<String, EnrichedBaseStationMessage> records =
+                KafkaTestUtils.getRecords(testConsumer, Duration.ofSeconds(3));
+
+        assertThat(records.count()).isEqualTo(1);
+
+        EnrichedBaseStationMessage enriched = records.iterator().next().value();
+
+        assertThat(enriched.msisdn()).isEqualTo("79991234567");
+        assertThat(enriched.latitude()).isEqualTo(59.0108);
+        assertThat(enriched.longitude()).isEqualTo(31.564);
+        assertThat(enriched.deviceVendor()).isEqualTo("Oppo");
+        assertThat(enriched.deviceModel()).isEqualTo("N1");
+    }
+
+    @Test
+    void shouldDropMessageIfImsiNotFoundAndNotInDict() {
+        BaseStationMessage unknownImsiMsg = new BaseStationMessage(
+                "250999999999999", "909999997890123", "79991234567",
+                "7202362", "UMTS", "sys", "5301", 10L, 10L, "ATTACH", Instant.now(), -50
+        );
+
+        sender.send(unknownImsiMsg, TOPIC_IN);
 
         ConsumerRecords<String, EnrichedBaseStationMessage> records =
                 KafkaTestUtils.getRecords(testConsumer, Duration.ofSeconds(3));
