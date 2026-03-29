@@ -1,0 +1,37 @@
+plugins {
+	id 'java'
+	id 'org.springframework.boot'
+	id 'io.spring.dependency-management'
+}
+
+description = 'Geo deduplication service'
+
+
+configurations {
+	compileOnly {
+		extendsFrom annotationProcessor
+	}
+}
+
+dependencies {
+	implementation project(':geo-common')
+	implementation 'org.springframework.boot:spring-boot-starter-kafka'
+	implementation 'org.springframework.boot:spring-boot-starter-webmvc'
+	implementation 'org.springframework.boot:spring-boot-starter-data-redis-reactive'
+	testImplementation 'org.testcontainers:testcontainers:2.0.3'
+	testImplementation 'org.testcontainers:junit-jupiter:1.21.4'
+	testImplementation 'org.testcontainers:testcontainers-kafka:2.0.3'
+	testImplementation 'com.redis:testcontainers-redis:2.2.4'
+	testImplementation 'org.springframework.boot:spring-boot-starter-data-redis-reactive-test'
+	testImplementation 'org.springframework.boot:spring-boot-starter-kafka-test'
+	testImplementation 'org.springframework.boot:spring-boot-starter-webmvc-test'
+	testRuntimeOnly 'org.junit.platform:junit-platform-launcher'
+}
+
+tasks.named('test') {
+	useJUnitPlatform()
+}
+
+bootJar {
+	archiveFileName = 'deduplication-service.jar'
+}

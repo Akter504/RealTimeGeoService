@@ -1,0 +1,12 @@
+rootProject.name = 'geo-system'
+
+include 'geo-common'
+include 'geo-api'
+include 'geo-processor'
+include 'filter-service'
+project(':filter-service').projectDir = file('geo-ingest/filter-service')
+include 'deduplication-service'
+project(':deduplication-service').projectDir = file('geo-ingest/deduplication-service')
+include 'enrichment-service'
+project(':enrichment-service').projectDir = file('geo-ingest/enrichment-service')
+
