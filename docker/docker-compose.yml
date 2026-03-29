@@ -21,6 +21,17 @@ services:
       KAFKA_INTER_BROKER_LISTENER_NAME: PLAINTEXT
       KAFKA_OFFSETS_TOPIC_REPLICATION_FACTOR: 1
 
+  kafka-ui:
+    image: provectuslabs/kafka-ui:latest
+    depends_on:
+      - kafka
+    ports:
+      - "8090:8080"
+    environment:
+      KAFKA_CLUSTERS_0_NAME: local
+      KAFKA_CLUSTERS_0_BOOTSTRAPSERVERS: kafka:29092
+      KAFKA_CLUSTERS_0_ZOOKEEPER: zookeeper:2181
+
   postgres:
     image: postgres:15-alpine
     environment:
@@ -47,11 +58,11 @@ services:
         soft: 262144
         hard: 262144
 
-  geo-ingest:
+  filter-service:
     build:
       context: ../
-      dockerfile: geo-ingest/Dockerfile
-    container_name: get-ingest
+      dockerfile: geo-ingest/filter-service/Dockerfile
+    container_name: filter-service
     ports:
       - "8080:8080"
     environment:
@@ -59,13 +70,27 @@ services:
     depends_on:
       - kafka
 
+  deduplication-service:
+    build:
+      context: ../
+      dockerfile: geo-ingest/deduplication-service/Dockerfile
+    container_name: deduplication-service
+    ports:
+      - "8081:8080"
+    environment:
+      - SPRING_KAFKA_BOOTSTRAP_SERVERS=kafka:29092
+      - SPRING_REDIS_HOST=redis
+    depends_on:
+      - kafka
+      - redis
+
   geo-processor:
     build:
       context: ../
       dockerfile: geo-processor/Dockerfile
     container_name: get-processor
     ports:
-      - "8081:8080"
+      - "8083:8080"
     environment:
       - SPRING_KAFKA_BOOTSTRAP_SERVERS=kafka:29092
       - SPRING_DATASOURCE_URL=${SPRING_DATASOURCE_URL}
@@ -83,7 +108,7 @@ services:
       dockerfile: geo-api/Dockerfile
     container_name: geo-api
     ports:
-      - "8082:8080"
+      - "8084:8080"
     environment:
       - SPRING_DATASOURCE_URL=${SPRING_DATASOURCE_URL}
       # - CLICKHOUSE_URL=...
