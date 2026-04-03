@@ -50,6 +50,10 @@ services:
 
   clickhouse:
     image: clickhouse/clickhouse-server
+    environment:
+      CLICKHOUSE_USER: ${CLICKHOUSE_USER}
+      CLICKHOUSE_PASSWORD: ${CLICKHOUSE_PASSWORD}
+      CLICKHOUSE_DB: ${CLICKHOUSE_DB}
     ports:
       - "8123:8123"
       - "9000:9000"
@@ -95,7 +99,7 @@ services:
       - SPRING_KAFKA_BOOTSTRAP_SERVERS=kafka:29092
       - SPRING_DATASOURCE_URL=${SPRING_DATASOURCE_URL}
       - SPRING_REDIS_HOST=redis
-      # - CLICKHOUSE_URL=...
+      - CLICKHOUSE_URL=${CLICKHOUSE_URL}
     depends_on:
       - kafka
       - postgres
@@ -111,9 +115,10 @@ services:
       - "8084:8080"
     environment:
       - SPRING_DATASOURCE_URL=${SPRING_DATASOURCE_URL}
-      # - CLICKHOUSE_URL=...
+      - CLICKHOUSE_URL=${CLICKHOUSE_URL}
     depends_on:
       - postgres
+      - redis
       - clickhouse
 
 volumes:
