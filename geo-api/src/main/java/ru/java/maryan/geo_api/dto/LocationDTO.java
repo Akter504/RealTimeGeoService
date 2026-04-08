@@ -1,5 +1,7 @@
 package ru.java.maryan.geo_api.dto;
 
+import ru.java.maryan.geo_api.enums.SubscriberStatus;
+
 import java.time.Instant;
 
 public record LocationDTO(
@@ -8,5 +10,5 @@ public record LocationDTO(
         Double lat,
         Double lon,
         Instant timestamp,
-        Integer status // 0 - Other, 1 - Work, 2 - Home
+        SubscriberStatus status
 ) {}

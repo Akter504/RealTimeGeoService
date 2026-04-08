@@ -14,6 +14,7 @@ import org.springframework.stereotype.Controller;
 import ru.java.maryan.geo_api.dto.LocationDTO;
 import ru.java.maryan.geo_api.dto.PlaceStatDTO;
 import ru.java.maryan.geo_api.dto.SubscriberProfileDTO;
+import ru.java.maryan.geo_api.enums.SubscriberStatus;
 import ru.java.maryan.geo_api.exceptions.SubscriberNotFoundException;
 import ru.java.maryan.geo_api.services.ClickHouseAnalyticsService;
 import ru.java.maryan.geo_api.services.RedisAnalyticsService;
@@ -65,7 +66,7 @@ public class GeoGraphQLController {
     }
 
     @QueryMapping
-    public Integer subscriberStatus(@Argument String imsi) {
+    public SubscriberStatus subscriberStatus(@Argument String imsi) {
         log.info("GraphQL Query: fetching status for IMSI: {}", imsi);
 
         boolean exists = redisService.subscriberExists(imsi);

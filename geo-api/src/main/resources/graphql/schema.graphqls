@@ -1,6 +1,6 @@
 type Query {
     subscriberProfile(imsi: String!): SubscriberProfile
-    subscriberStatus(imsi: String!): Int
+    subscriberStatus(imsi: String!): SubscriberStatus
     usersCountInRadius(lat: Float!, lon: Float!, radiusMeters: Float!): Int
 }
 
@@ -16,10 +16,16 @@ type Location {
     lat: Float
     lon: Float
     timestamp: String
-    status: Int
+    status: SubscriberStatus
 }
 
 type PlaceStat {
     cellId: String
     visitsCount: Int
+}
+
+enum SubscriberStatus {
+    OTHER
+    WORK
+    HOME
 }

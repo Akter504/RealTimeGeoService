@@ -10,6 +10,7 @@ import org.springframework.data.geo.Point;
 import org.springframework.data.redis.core.StringRedisTemplate;
 import org.springframework.stereotype.Service;
 import ru.java.maryan.geo_api.dto.LocationDTO;
+import ru.java.maryan.geo_api.enums.SubscriberStatus;
 import ru.java.maryan.geo_api.records.LastKnownLocationRecord;
 
 import static ru.java.maryan.geo_api.constants.RedisConstant.*;
@@ -49,7 +50,7 @@ public class RedisAnalyticsService {
                     lkl.lat(),
                     lkl.lon(),
                     lkl.timestamp(),
-                    lkl.status()
+                    SubscriberStatus.fromCode(lkl.status())
             );
         } catch (Exception e) {
             log.error("Failed to parse LKL for IMSI {}", imsi, e);
@@ -69,7 +70,7 @@ public class RedisAnalyticsService {
         return results.getContent().size();
     }
 
-    public Integer getSubscriberStatus(String imsi) {
+    public SubscriberStatus getSubscriberStatus(String imsi) {
         String redisKey = LAST_KNOWN_LOCATION_PREFIX + COLON + imsi;
         String json = redisTemplate.opsForValue().get(redisKey);
 
@@ -79,7 +80,7 @@ public class RedisAnalyticsService {
 
         try {
             LastKnownLocationRecord lkl = objectMapper.readValue(json, LastKnownLocationRecord.class);
-            return lkl.status();
+            return SubscriberStatus.fromCode(lkl.status());
         } catch (Exception e) {
             log.error("Failed to parse LKL status for IMSI {}", imsi, e);
             return null;
