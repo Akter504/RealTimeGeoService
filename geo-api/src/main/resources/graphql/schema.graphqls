@@ -1,0 +1,25 @@
+type Query {
+    subscriberProfile(imsi: String!): SubscriberProfile
+    subscriberStatus(imsi: String!): Int
+    usersCountInRadius(lat: Float!, lon: Float!, radiusMeters: Float!): Int
+}
+
+type SubscriberProfile {
+    imsi: String!
+    currentLocation: Location
+    topVisitedPlaces(limit: Int = 5): [PlaceStat]
+}
+
+type Location {
+    lac: String
+    cellId: String
+    lat: Float
+    lon: Float
+    timestamp: String
+    status: Int
+}
+
+type PlaceStat {
+    cellId: String
+    visitsCount: Int
+}
