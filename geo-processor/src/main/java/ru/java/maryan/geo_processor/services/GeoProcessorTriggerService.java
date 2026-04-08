@@ -1,5 +1,7 @@
 package ru.java.maryan.geo_processor.services;
 
+import com.fasterxml.jackson.core.JsonProcessingException;
+import com.fasterxml.jackson.databind.ObjectMapper;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
@@ -12,7 +14,6 @@ import ru.java.maryan.geo_common.services.MessageHandler;
 import ru.java.maryan.geo_common.services.MessageSender;
 import ru.java.maryan.geo_processor.dto.LocationTriggerEvent;
 import ru.java.maryan.geo_processor.records.LastKnownLocationRecord;
-import tools.jackson.databind.ObjectMapper;
 
 import java.time.Duration;
 import java.time.Instant;
@@ -26,6 +27,7 @@ public class GeoProcessorTriggerService implements MessageHandler<EnrichedBaseSt
     private final MessageSender<LocationTriggerEvent> sender;
     private final ObjectMapper mapper;
     private final StringRedisTemplate redisTemplate;
+    private final HomeWorkStatusService homeWorkStatusService;
 
     @Value("${spring.kafka.consumer.topic-out}")
     private String outputTopic;
@@ -33,10 +35,12 @@ public class GeoProcessorTriggerService implements MessageHandler<EnrichedBaseSt
     @Autowired
     public GeoProcessorTriggerService(MessageSender<LocationTriggerEvent> sender,
                           ObjectMapper mapper,
-                          StringRedisTemplate redisTemplate) {
+                          StringRedisTemplate redisTemplate,
+                          HomeWorkStatusService homeWorkStatusService) {
         this.sender = sender;
         this.mapper = mapper;
         this.redisTemplate = redisTemplate;
+        this.homeWorkStatusService = homeWorkStatusService;
     }
 
     @Override
@@ -56,41 +60,59 @@ public class GeoProcessorTriggerService implements MessageHandler<EnrichedBaseSt
         String newLac = msg.lac();
         String cellId = msg.rawCellId().toString();
         Instant timestamp = msg.timestamp();
+        
         try {
             String jsonValue = redisTemplate.opsForValue().get(redisKey);
             if (jsonValue == null) {
                 log.info("New subscriber detected: {}. Triggering ENTRY to LAC: {}", imsi, newLac);
+                int status = homeWorkStatusService.resolveStatus(imsi, newLac, cellId);
                 sendTrigger(imsi, TRIGGER_TYPE_ENTRY, newLac, cellId, timestamp);
+                updateData(redisKey, newLac, cellId, timestamp, msg.latitude(), msg.longitude(), imsi, status);
             } else {
                 LastKnownLocationRecord lkl = mapper.readValue(jsonValue, LastKnownLocationRecord.class);
                 String oldLac = lkl.lac();
+                String oldCellId = lkl.cellId();
 
+                int status = resolveStatusForMovement(imsi, newLac, cellId, oldCellId, lkl);
                 if (!oldLac.equals(newLac)) {
                     log.info("Subscriber {} moved from LAC {} to LAC {}", imsi, oldLac, newLac);
+                    sendTrigger(imsi, TRIGGER_TYPE_EXIT, oldLac, oldCellId, msg.timestamp());
 
-                    sendTrigger(imsi, TRIGGER_TYPE_EXIT, oldLac, lkl.cellId(), msg.timestamp());
                     sendTrigger(imsi, TRIGGER_TYPE_ENTRY, newLac, cellId, timestamp);
+                    updateData(redisKey, newLac, cellId, timestamp, msg.latitude(), msg.longitude(), imsi, status);
                 } else {
                     log.debug("Subscriber {} remains in LAC {}. No triggers fired.", imsi, newLac);
+                    updateData(redisKey, newLac, cellId, timestamp, msg.latitude(), msg.longitude(), imsi, status);
                 }
             }
-            updateData(redisKey, newLac, cellId, timestamp, msg.latitude(), msg.longitude(), imsi);
         } catch (Exception e) {
             log.error("Error processing triggers for subscriber {}", imsi, e);
         }
     }
 
-    private static final Duration LKL_TTL = Duration.ofDays(1);
+    private int resolveStatusForMovement(String imsi, String newLac, String newCellId, String oldCellId, LastKnownLocationRecord oldLkl) {
+        if (!oldCellId.equals(newCellId)) {
+            log.debug("Subscriber {} changed cell: {} -> {}", imsi, oldCellId, newCellId);
+            return homeWorkStatusService.resolveStatus(imsi, newLac, newCellId);
+        }
+        return oldLkl.status() != null ? oldLkl.status() : STATUS_OTHER;
+    }
 
+    private static final Duration LKL_TTL = Duration.ofDays(1);
     private void updateData(String redisKey,
                             String lac,
                             String cellId,
                             Instant timestamp,
                             Double lat,
                             Double lon,
-                            String imsi) {
-        LastKnownLocationRecord lkl = new LastKnownLocationRecord(cellId, lac, timestamp);
-        redisTemplate.opsForValue().set(redisKey, mapper.writeValueAsString(lkl), LKL_TTL);
+                            String imsi,
+                            Integer status) {
+        LastKnownLocationRecord lkl = new LastKnownLocationRecord(cellId, lac, timestamp, lat, lon, status);
+        try {
+            redisTemplate.opsForValue().set(redisKey, mapper.writeValueAsString(lkl), LKL_TTL);
+        } catch (JsonProcessingException e) {
+            throw new RuntimeException(e);
+        }
 
         if (lat != null && lon != null) {
             redisTemplate.opsForGeo().add(GEO_GLOBAL_MAP_KEY, new Point(lon, lat), imsi);
