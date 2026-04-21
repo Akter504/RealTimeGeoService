@@ -1,4 +1,4 @@
-package ru.java.maryan.geo_processor.configs;
+package ru.java.maryan.geo_api.configs;
 
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.beans.factory.annotation.Value;
@@ -14,9 +14,9 @@ public class ClickHouseJdbcConfiguration {
 
     @Bean
     public DataSource clickHouseDataSource(
-            @Value("${geo.processor.clickHouse.url}") String url,
-            @Value("${geo.processor.clickHouse.username}") String username,
-            @Value("${geo.processor.clickHouse.password}") String password
+            @Value("${geo.api.clickHouse.url}") String url,
+            @Value("${geo.api.clickHouse.username}") String username,
+            @Value("${geo.api.clickHouse.password}") String password
     ) {
         DriverManagerDataSource dataSource = new DriverManagerDataSource();
         dataSource.setDriverClassName("com.clickhouse.jdbc.ClickHouseDriver");
