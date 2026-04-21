@@ -1,0 +1,13 @@
+global:
+  scrape_interval: 10s
+
+scrape_configs:
+  - job_name: 'geo-services'
+    metrics_path: '/actuator/prometheus'
+    static_configs:
+      - targets:
+          - 'filter-service:8080'
+          - 'deduplication-service:8080'
+          - 'enrichment-service:8080'
+          - 'geo-processor:8080'
+          - 'geo-api:8080'
