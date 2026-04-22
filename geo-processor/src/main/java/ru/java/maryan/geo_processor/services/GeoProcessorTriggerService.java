@@ -22,6 +22,7 @@ import java.time.Instant;
 
 import static ru.java.maryan.geo_common.constants.KafkaConstants.TRACE_ID;
 import static ru.java.maryan.geo_common.constants.StationMessage.COLON;
+import static ru.java.maryan.geo_common.constants.StationMessage.IMSI;
 import static ru.java.maryan.geo_processor.constants.GeoProcessorConstants.*;
 
 @Slf4j
@@ -59,7 +60,7 @@ public class GeoProcessorTriggerService implements MessageHandler<EnrichedBaseSt
             return;
         }
 
-        try (var ignored = MDC.putCloseable(TRACE_ID, message.imsi())) {
+        try (var ignored = MDC.putCloseable(TRACE_ID, IMSI + COLON + message.imsi())) {
             log.debug("Received enriched message for IMSI: {}. Starting trigger processing...", imsi);
             processMovementTriggers(imsi, message);
         }

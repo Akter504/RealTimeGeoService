@@ -11,3 +11,7 @@ scrape_configs:
           - 'enrichment-service:8080'
           - 'geo-processor:8080'
           - 'geo-api:8080'
+  - job_name: 'kafka'
+    static_configs:
+      - targets:
+          - 'kafka-jmx-exporter:7071'
