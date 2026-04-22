@@ -8,7 +8,6 @@ import org.springframework.beans.factory.annotation.Value;
 import org.springframework.data.redis.core.StringRedisTemplate;
 import org.springframework.kafka.annotation.KafkaListener;
 import org.springframework.stereotype.Service;
-import ru.java.maryan.enrichment_service.metrics.EnrichmentServiceMetrics;
 import ru.java.maryan.enrichment_service.records.TacCsvRecord;
 import ru.java.maryan.enrichment_service.records.TowerCsvRecord;
 import ru.java.maryan.geo_common.dto.geo_ingest.BaseStationMessage;
@@ -24,7 +23,6 @@ import static ru.java.maryan.geo_common.constants.StationMessage.*;
 public class EnrichmentService implements MessageHandler<BaseStationMessage> {
 
     private final MessageSender<EnrichedBaseStationMessage> sender;
-    private final EnrichmentServiceMetrics serviceMetrics;
     private final CellTowerService cellTowerService;
     private final StringRedisTemplate redisTemplate;
     private final ObjectMapper objectMapper;
@@ -34,12 +32,10 @@ public class EnrichmentService implements MessageHandler<BaseStationMessage> {
 
     @Autowired
     public EnrichmentService(MessageSender<EnrichedBaseStationMessage> sender,
-                             EnrichmentServiceMetrics serviceMetrics,
                              CellTowerService cellTowerService,
                              StringRedisTemplate redisTemplate,
                              ObjectMapper objectMapper) {
         this.sender = sender;
-        this.serviceMetrics = serviceMetrics;
         this.cellTowerService = cellTowerService;
         this.redisTemplate = redisTemplate;
         this.objectMapper = objectMapper;
@@ -50,13 +46,11 @@ public class EnrichmentService implements MessageHandler<BaseStationMessage> {
     public void handle(BaseStationMessage message) {
         try (var ignored = MDC.putCloseable(TRACE_ID, message.getTraceId())) {
             log.debug("Starting enrichment process...");
-            serviceMetrics.recordReceived();
 
             EnrichedBaseStationMessage enrichedMessage = enrich(message);
             if (enrichedMessage != null) {
                 log.info("Successfully enriched message with Device [{}] and Location [Lat: {}, Lon: {}]",
                         enrichedMessage.deviceModel(), enrichedMessage.latitude(), enrichedMessage.longitude());
-                serviceMetrics.recordEnriched();
                 sender.send(enrichedMessage, outputTopic);
             } else {
                 log.warn("Failed to enrich message. The message has been sent to the deferred queue.");
@@ -94,7 +88,6 @@ public class EnrichmentService implements MessageHandler<BaseStationMessage> {
         try {
             String json = objectMapper.writeValueAsString(msg);
             redisTemplate.opsForList().rightPush(UNRESOLVED_QUEUE, json);
-            serviceMetrics.recordPostponed();
         } catch (Exception e) {
             log.error("Failed to postpone message", e);
         }
