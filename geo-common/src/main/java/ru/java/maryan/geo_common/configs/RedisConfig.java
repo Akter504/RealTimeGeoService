@@ -1,4 +1,4 @@
-package ru.java.maryan.deduplication_service.configs;
+package ru.java.maryan.geo_common.configs;
 
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;

@@ -1,4 +1,4 @@
-package ru.java.maryan.enrichment_service.configs;
+package ru.java.maryan.geo_api.configs;
 
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
