@@ -13,7 +13,6 @@ import javax.sql.DataSource;
 public class ClickHouseJdbcConfiguration {
 
     @Bean
-    @Qualifier("clickHouseDataSource")
     public DataSource clickHouseDataSource(
             @Value("${geo.processor.clickHouse.url}") String url,
             @Value("${geo.processor.clickHouse.username}") String username,
@@ -28,7 +27,6 @@ public class ClickHouseJdbcConfiguration {
     }
 
     @Bean
-    @Qualifier("clickHouseJdbcTemplate")
     public JdbcTemplate clickHouseJdbcTemplate(@Qualifier("clickHouseDataSource") DataSource clickHouseDataSource) {
         return new JdbcTemplate(clickHouseDataSource);
     }

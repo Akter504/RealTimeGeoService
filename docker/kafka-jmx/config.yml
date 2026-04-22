@@ -1,0 +1,18 @@
+hostPort: kafka:9101
+lowercaseOutputName: true
+rules:
+  - pattern: kafka.server<type=(.+), name=(.+), clientId=(.+), topic=(.+), partition=(.*)><>Value
+    name: kafka_server_$1_$2
+    type: GAUGE
+    labels:
+      clientId: "$3"
+      topic: "$4"
+      partition: "$5"
+  - pattern: kafka.(\w+)<type=(.+), name=(.+)PerSec\w*><>Count
+    name: kafka_$1_$2_$3_total
+    type: COUNTER
+  - pattern: kafka.(\w+)<type=(.+), name=(.+)><>Value
+    name: kafka_$1_$2_$3
+    type: GAUGE
+  - pattern: "kafka.*"
+  - pattern: "java.lang<.*>"

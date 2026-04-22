@@ -2,6 +2,10 @@ package ru.java.maryan.geo_common.dto.geo_ingest;
 
 import java.time.Instant;
 
+import static ru.java.maryan.geo_common.constants.KafkaConstants.IMSI_NULL_STATUS;
+import static ru.java.maryan.geo_common.constants.StationMessage.*;
+import static ru.java.maryan.geo_common.constants.StationMessage.COLON;
+
 public record EnrichedBaseStationMessage(
         String msisdn,
         String imsi,
