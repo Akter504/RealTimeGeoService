@@ -3,10 +3,7 @@ package ru.java.maryan.geo_processor;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 
-@SpringBootApplication(scanBasePackages = {
-		"ru.java.maryan.geo_common",
-		"ru.java.maryan.geo_processor"
-})
+@SpringBootApplication
 public class GeoProcessorApplication {
 
 	public static void main(String[] args) {

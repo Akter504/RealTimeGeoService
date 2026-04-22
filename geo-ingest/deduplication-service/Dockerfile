@@ -1,8 +1,13 @@
+FROM gradle:jdk21-alpine as build
+WORKDIR /app
+
+COPY . .
+
+RUN gradle :deduplication-service:bootJar -x test --no-daemon --console=plain
+
 FROM eclipse-temurin:21-jre-jammy
 WORKDIR /app
 
-ARG JAR_FILE=build/libs/*.jar
-
-COPY ${JAR_FILE} app.jar
+COPY --from=build /app/geo-ingest/deduplication-service/build/libs/*.jar app.jar
 
 ENTRYPOINT ["java", "-jar", "app.jar"]
