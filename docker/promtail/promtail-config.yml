@@ -2,7 +2,7 @@ server:
   http_listen_port: 9080
 
 positions:
-  filename: /tmp/positions.yaml # Запоминает, где остановился читать
+  filename: /tmp/positions.yaml
 
 clients:
   - url: http://loki:3100/loki/api/v1/push
@@ -15,6 +15,13 @@ scrape_configs:
         filters:
           - name: label
             values: ["logging=promtail"]
+
+    relabel_configs:
+      - source_labels: ['__meta_docker_container_name']
+        regex: '/(.*)'
+        target_label: 'container'
+      - source_labels: ['__meta_docker_container_label_logging']
+        target_label: 'job'
 
     pipeline_stages:
       - json:
