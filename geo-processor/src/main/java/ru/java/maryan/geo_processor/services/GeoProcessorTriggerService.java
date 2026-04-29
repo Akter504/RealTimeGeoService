@@ -37,6 +37,9 @@ public class GeoProcessorTriggerService implements MessageHandler<EnrichedBaseSt
     @Value("${spring.kafka.consumer.topic-out}")
     private String outputTopic;
 
+    @Value("${geo.processor.lkl-ttl:1d}")
+    private Duration lklTtl;
+
     @Autowired
     public GeoProcessorTriggerService(MessageSender<LocationTriggerEvent> sender,
                                       GeoProcessorMetrics processorMetrics,
@@ -104,7 +107,6 @@ public class GeoProcessorTriggerService implements MessageHandler<EnrichedBaseSt
         }
     }
 
-    private static final Duration LKL_TTL = Duration.ofDays(1);
     private void updateData(String redisKey,
                             String lac,
                             String cellId,
@@ -115,10 +117,16 @@ public class GeoProcessorTriggerService implements MessageHandler<EnrichedBaseSt
                             Integer status) {
         LastKnownLocationRecord lkl = new LastKnownLocationRecord(cellId, lac, timestamp, lat, lon, status);
         try {
-            redisTemplate.opsForValue().set(redisKey, mapper.writeValueAsString(lkl), LKL_TTL);
+            redisTemplate.opsForValue().set(redisKey, mapper.writeValueAsString(lkl), lklTtl);
         } catch (JsonProcessingException e) {
             throw new RuntimeException(e);
         }
+
+        redisTemplate.opsForZSet().add(
+                ACTIVE_SUBSCRIBERS,
+                imsi,
+                timestamp.toEpochMilli()
+        );
 
         if (lat != null && lon != null) {
             redisTemplate.opsForGeo().add(GEO_GLOBAL_MAP_KEY, new Point(lon, lat), imsi);

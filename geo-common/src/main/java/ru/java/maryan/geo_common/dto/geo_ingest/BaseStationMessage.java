@@ -1,10 +1,13 @@
 package ru.java.maryan.geo_common.dto.geo_ingest;
 
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
+
 import java.time.Instant;
 
 import static ru.java.maryan.geo_common.constants.KafkaConstants.IMSI_NULL_STATUS;
 import static ru.java.maryan.geo_common.constants.StationMessage.*;
 
+@JsonIgnoreProperties(ignoreUnknown = true)
 public record BaseStationMessage(
         String imsi,
         String imei,
