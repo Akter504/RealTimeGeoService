@@ -13,3 +13,16 @@ datasources:
     access: proxy
     url: http://loki:3100
     editable: false
+
+  - name: ClickHouse
+    type: grafana-clickhouse-datasource
+    access: proxy
+    url: clickhouse:9000
+    editable: false
+    jsonData:
+      server: clickhouse
+      port: 9000
+      username: default
+      defaultDatabase: default
+    secureJsonData:
+      password: geogeo

@@ -38,7 +38,7 @@ CREATE TABLE kafka_enriched_events_queue (
 SETTINGS
     kafka_broker_list = 'kafka:29092',
     kafka_topic_list = 'enrichment-stations',
-    kafka_group_name = 'clickhouse_final_fix_group', -- Новая группа, чтобы прочитать старое
+    kafka_group_name = 'clickhouse_final_fix_group',
     kafka_format = 'JSONEachRow';
 
 CREATE MATERIALIZED VIEW enriched_events_mv TO enriched_geo_events AS
