@@ -3,7 +3,11 @@ networks:
     driver: bridge
 
 volumes:
-  pg_data:
+  clickhouse_data:
+  redis_data:
+  prometheus_data:
+  loki_data:
+  grafana_data:
 
 services:
   zookeeper:
@@ -25,6 +29,7 @@ services:
     environment:
       KAFKA_BROKER_ID: 1
       KAFKA_ZOOKEEPER_CONNECT: zookeeper:2181
+      KAFKA_LISTENERS: PLAINTEXT://0.0.0.0:29092,PLAINTEXT_HOST://0.0.0.0:9092
       KAFKA_ADVERTISED_LISTENERS: PLAINTEXT://kafka:29092,PLAINTEXT_HOST://localhost:9092
       KAFKA_LISTENER_SECURITY_PROTOCOL_MAP: PLAINTEXT:PLAINTEXT,PLAINTEXT_HOST:PLAINTEXT
       KAFKA_INTER_BROKER_LISTENER_NAME: PLAINTEXT
@@ -41,7 +46,7 @@ services:
     environment:
       SERVICE_URL: "service:jmx:rmi:///jndi/rmi://kafka:9101/jmxrmi"
     volumes:
-      - ./kafka-jmx/config.yml:/opt/bitnami/jmx-exporter/config.yml  # 👈 путь исправлен
+      - ./kafka-jmx/config.yml:/opt/bitnami/jmx-exporter/config.yml
     command: [ "7071", "/opt/bitnami/jmx-exporter/config.yml" ]
     depends_on:
       - kafka
@@ -58,19 +63,6 @@ services:
       KAFKA_CLUSTERS_0_NAME: local
       KAFKA_CLUSTERS_0_BOOTSTRAPSERVERS: kafka:29092
       KAFKA_CLUSTERS_0_ZOOKEEPER: zookeeper:2181
-
-  postgres:
-    image: postgres:15-alpine
-    container_name: postgres
-    networks: [geo-network]
-    environment:
-      POSTGRES_USER: ${POSTGRES_USER}
-      POSTGRES_PASSWORD: ${POSTGRES_PASSWORD}
-      POSTGRES_DB: ${POSTGRES_DB}
-    ports:
-      - "5432:5432"
-    volumes:
-      - pg_data:/var/lib/postgresql/data
 
   redis:
     image: redis:7-alpine
@@ -95,7 +87,8 @@ services:
         soft: 262144
         hard: 262144
     volumes:
-      - ./clickhouse-init/init.sql:/docker-entrypoint-initdb.d/init.sql
+      - ./clickhouse-init:/docker-entrypoint-initdb.d/
+      - ./clickhouse-init/csv:/var/lib/clickhouse/user_files/
 
   filter-service:
     build:
@@ -169,7 +162,6 @@ services:
       - "logging=promtail"
     depends_on:
       - kafka
-      - postgres
       - redis
       - clickhouse
 
@@ -189,7 +181,6 @@ services:
     labels:
       - "logging=promtail"
     depends_on:
-      - postgres
       - redis
       - clickhouse
 
@@ -223,13 +214,14 @@ services:
       - ./prometheus/prometheus.yml:/etc/prometheus/prometheus.yml
 
   grafana:
-    image: grafana/grafana:10.2.2
+    image: grafana/grafana
     container_name: grafana
     networks: [geo-network]
     ports:
       - "3000:3000"
     environment:
       - GF_SECURITY_ADMIN_PASSWORD=admin
+      - GF_INSTALL_PLUGINS=grafana-clickhouse-datasource
       - GF_SECURITY_ALLOW_EMBEDDING=true
     volumes:
       - ./grafana/provisioning/datasources:/etc/grafana/provisioning/datasources

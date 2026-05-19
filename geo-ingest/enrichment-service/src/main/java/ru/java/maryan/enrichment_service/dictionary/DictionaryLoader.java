@@ -102,7 +102,7 @@ public class DictionaryLoader {
 
                 int count = 0;
                 for (TacCsvRecord tacCsvRecord : records) {
-                    String redisKey = tacCsvRecord.getTac().toString();
+                    String redisKey = tacCsvRecord.getTac();
                     String jsonValue = objectMapper.writeValueAsString(tacCsvRecord);
 
                     redisTemplate.opsForValue().set(TAC + COLON + redisKey, jsonValue);

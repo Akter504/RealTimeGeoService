@@ -10,7 +10,7 @@ import lombok.Setter;
 @Getter
 public class TacCsvRecord {
     @CsvBindByName(column = "tac")
-    private Integer tac;
+    private String tac;
 
     @CsvBindByName(column = "company")
     private String company;

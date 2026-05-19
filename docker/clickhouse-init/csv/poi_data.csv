@@ -1,0 +1,468 @@
+poi_id,poi_type,poi_name,latitude,longitude,radius_meters
+1,MALL,12 mesyaczev [RUS-Russia],55.6822,37.8681,2500
+2,MALL,Ashan [RUS-Russia],55.9130,37.5730,2500
+3,MALL,Ashan [RUS-Russia],55.8974,37.6662,2500
+4,MALL,Franczuzkij Bulbvar [RUS-Russia],59.8510,30.2683,2500
+5,MALL,Gipermarket LINIYa [RUS-Russia],51.6869,39.2571,2500
+6,MALL,Ikeya [RUS-Russia],59.8868,30.4979,2500
+7,MALL,Karusel' [RUS-Russia],59.9126,30.44987,2500
+8,MALL,Karusel' [RUS-Russia],59.9865,30.2173,2500
+9,MALL,Lenta [RUS-Russia],59.8502,30.39872,2500
+10,MALL,Lenta [RUS-Russia],59.9850,30.22629,2500
+11,MALL,Lenta [RUS-Russia],60.0466,30.31512,2500
+12,MALL,Lenta. [RUS-Russia],59.9460,30.43465,2500
+13,MALL,MEGA [RUS-Russia],60.0910,30.37273,2500
+14,MALL,Mega [RUS-Russia],55.6033,37.4921,2500
+15,MALL,Metro Cash & Carry [RUS-Russia],55.8760,37.4478,2500
+16,MALL,Metro Cash & Carry [RUS-Russia],55.6554,37.9070,2500
+17,MALL,Mosmart [RUS-Russia],55.9012,37.5477,2500
+18,MALL,OKej [RUS-Russia],60.0567,30.3089,2500
+19,MALL,OKej [RUS-Russia],60.0378,30.3212,2500
+20,MALL,Okej [RUS-Russia],59.9310,30.4305,2500
+21,MALL,Pamstor Siti [RUS-Russia],55.8803,37.4495,2500
+22,MALL,Putilovskij Rinok [RUS-Russia],59.8529,30.2847,2500
+23,MALL,Real [RUS-Russia],55.6688231,37.86584,2500
+24,MALL,Santa-Hauz [RUS-Russia],59.8556063,30.22465,2500
+25,MALL,TCz Iyun' [RUS-Russia],59.945984,30.47488,2500
+26,MALL,TCz Rossiya [RUS-Russia],51.6666272,39.19182,2500
+27,MALL,TCz Solnechnij raj [RUS-Russia],51.6554769,39.18839,2500
+28,MALL,TD Perovskij [RUS-Russia],55.7527799,37.81936,2500
+29,Grocery Store,SPAR улица Ленина 52 [Светлогорск],54.9419528,20.13665,50028
+30,Grocery Store,SPAR ул. Печатная 21б [Калининград],54.6725011,20.47965,500
+31,Grocery Store,SPAR ул. Железнодорожная 40 [Зеленоградский район],54.9498972,20.47139,500
+32,Grocery Store,SPAR улица Левитана 22 [Калининград],54.6753508,20.5795299,500
+33,Grocery Store,SPAR Калининградский пр. 2A [Светлогорск],54.9258408,20.17291,500
+34,Grocery Store,SPAR ул. Литовский вал 2 [Калининград],54.7208082,20.52587,500
+35,Grocery Store,SPAR ул. Панина 2A [Калининград],54.7475909,20.49932,500
+36,Grocery Store,SPAR Пражский бульвар 1Ж [Гурьевский район],54.7621199,20.60608,500
+37,Grocery Store,SPAR Московский проспект 135 [Калининград],54.7100952,20.53254,500
+38,Grocery Store,SPAR ул. Подполковника Емельянова 285 [Калининград],54.6755106,20.62339,500
+39,Grocery Store,SPAR улица Карла Маркса 18 [Калининград],54.7292236,20.48085,500
+40,Grocery Store,SPAR Елизаветинская улица 11 [Калининград],54.7468832,20.4826799,500
+41,Grocery Store,SPAR ул. Юрия Гагарина 13 [Калининград],54.716954,20.54097,500
+42,Grocery Store,SPAR улица Гагарина 14 [Советск],55.0851987,21.89201,500
+43,Grocery Store,SPAR улица Аксакова 125 [Калининград],54.7117043,20.57922,1000
+44,Grocery Store,SPAR улица Виктора Гакуна 5А [Калининград],54.748027,20.52831,500
+45,Grocery Store,SPAR улица Старшины Дадаева 63 [Калининград],54.7298092,20.54235,500
+46,Grocery Store,SPAR Краснопрудная улица 65 [Калининград],54.7089798,20.57862,500
+47,Grocery Store,SPAR Красносельская улица 85А [Калининград],54.7203537,20.44267,500
+48,Grocery Store,SPAR улица Олега Кошевого 37А [Калининград],54.6689222,20.5128999,500
+49,Grocery Store,SPAR улица Горького 96 [Калининград],54.7319775,20.51084,500
+50,Grocery Store,SPAR улица Гайдара 112 [Калининград],54.7423176,20.49925,500
+51,Grocery Store,SPAR Советский проспект 234 [Калининград],54.7492894,20.45835,500
+52,Grocery Store,SPAR Sovetskaya ulitsa 4 [Svetlyy],54.6757617,20.1346,500
+53,Grocery Store,SPAR Московский проспект 231 [Калининград],54.708782,20.57329,500
+54,Grocery Store,SPAR улица Генерала Буткова 16 [Калининград],54.7094498,20.4945999,500
+55,Grocery Store,SPAR Балтийское шоссе 114 [Калининград],54.7152214,20.37263,500
+56,Grocery Store,SPAR Краснооктябрьская улица 1-7 [Калининград],54.7025163,20.50613,500
+57,Grocery Store,SPAR улица Ст. Лейтенанта Сибирякова 13 [Калининград],54.735521,20.50549,500
+58,Grocery Store,SPAR улица В. Егорова 10 [Балтийск],54.6597479,19.91051,500
+59,Grocery Store,SPAR Минусинская улица 16 [Калининград],54.6776927,20.4755,500
+60,Grocery Store,SPAR улица Пушкина 5 [Калининград],54.7180708,20.47362,500
+61,Grocery Store,SPAR Крайняя улица 1В [Гурьевский район],54.7773908,20.59585,500
+62,Grocery Store,SPAR улица Дзержинского 160А [Калининград],54.6741776,20.54179,500
+63,Grocery Store,SPAR Moskovskiy Prospekt 174 [Kaliningrad],54.7094501,20.54343,500
+64,Grocery Store,SPAR ulitsa Ponartskaya 3 [Kaliningrad],54.6633801,20.50654,500
+65,Grocery Store,SPAR ulitsa Tolstikova 2 [Kaliningrad],54.6791459,20.4923499,500
+66,Grocery Store,SPAR ulitsa Kiyevskaya 119Б [Kaliningrad],54.6811588,20.46819,500
+67,Grocery Store,SPAR Ulitsa Shaturskaya 5 [Vasil'kovo],54.7416621,20.58106,500
+68,Grocery Store,SPAR Primorskoye Koltso 2 [Gur'yevskiy Rayon],54.7729448,20.5487499,500
+69,Grocery Store,SPAR Sadovaya ulitsa 3 [Pionerski],54.9499475,20.22559,500
+70,Grocery Store,SPAR Okruzhnaya ulitsa 15 [Zelenogradskiy rayon],54.9544761,20.48358,500
+71,Grocery Store,SPAR Kaliningradskaya ulitsa 2 [Chernyakhovsk],54.6370097,21.8073,500
+72,Grocery Store,SPAR ulitsa Turgeneva 1Б [Zelenogradsk],54.9588029,20.4739,500
+73,Grocery Store,SPAR ulitsa Lenina 15 [Svetlogorsk],54.9446026,20.15561,500
+74,Grocery Store,SPAR ulitsa Gor'kogo 13 [Svetlyy],54.6764606,20.13663,500
+75,Grocery Store,SPAR Aldanskaya ulitsa 4Б [Kaliningrad],54.7275993,20.35302,500
+76,Grocery Store,SPAR prospekt Pobedy 40 [Kaliningrad],54.7147452,20.45831,500
+77,Grocery Store,SPAR prospekt Mira 31 [Kaliningrad],54.719749,20.48482,500
+78,Grocery Store,SPAR Teatral'naya ulitsa 21 [Kaliningrad],54.7165763,20.50036,500
+79,Grocery Store,SPAR ulitsa Proletarskaya 55-61A [Kaliningrad],54.7174073,20.51257,500
+80,Grocery Store,SPAR ulitsa Chernyakhovskogo 76 [Kaliningrad],54.7204317,20.51626,500
+81,Grocery Store,SPAR ulitsa Aleksandra Nevskogo 24-30 [Kaliningrad],54.7266558,20.5280099,500
+82,Grocery Store,SPAR ulitsa Partisana Zheleznyaka 3 [Kaliningrad],54.7288478,20.53904,500
+83,Grocery Store,SPAR ulitsa Lipovaya alleya 2 [Kaliningrad],54.7319884,20.55083,500
+84,Grocery Store,SPAR Aeroportnaya ulitsa 12 [Kaliningrad],54.7310942,20.55414,500
+85,Grocery Store,SPAR ulitsa Krymskaya 8 [Kaliningrad],54.7078652,20.5871299,500
+86,Grocery Store,SPAR Epronovskaya ulitsa 21 [Kaliningrad],54.7021489,20.51277,500
+87,Grocery Store,SPAR ulitsa Aleksandra Suvorova 40 [Kaliningrad],54.693616,20.4727,500
+88,Grocery Store,SPAR Avtomobil'naya ulitsa 22 [Kaliningrad],54.6743802,20.4901899,500
+89,Grocery Store,SPAR Internatsional'naya ulitsa 76 [Kaliningrad],54.6688318,20.5102699,500
+90,Grocery Store,SPAR ulitsa Kashtanovaya alleya 157 [Kaliningrad],54.735774,20.46312,500
+91,Grocery Store,SPAR ulitsa Karla Marksa 118Б [Kaliningrad],54.7245092,20.46467,500
+92,Grocery Store,SPAR ulitsa Kashtanovaya alleya 97 [Kaliningrad],54.7265822,20.4635,500
+93,Grocery Store,SPAR ulitsa Kosmonavta Leonova 48 [Kaliningrad],54.7311289,20.4817,500
+94,Grocery Store,SPAR ulitsa Narvskaya 46 [Kaliningrad],54.7317231,20.4979,500
+95,Grocery Store,SPAR ulitsa Generala Chelnokova 11 [Kaliningrad],54.7374964,20.48757,500
+96,Grocery Store,SPAR ulitsa Gor'kogo 170 [Kaliningrad],54.7491993,20.50166,500
+97,Grocery Store,SPAR ulitsa Aleksandra Nevskogo 137Б [Kaliningrad],54.7418275,20.53175,500
+98,Grocery Store,SPAR ulitsa Belanova 85А [Kaliningrad],54.7726019,20.44694,500
+99,Grocery Store,SPAR Rublyovo-Uspenskoye shosse 186 [Odintsovo],55.7372753,37.24856,500
+100,Grocery Store,SPAR ulitsa Pobedy 28 [Krasnosnamensk],55.591569,37.03334,500
+101,Grocery Store,SPAR Tallinnskaya ulitsa 18 [Moskva],55.7971219,37.40254,500
+102,Grocery Store,SPAR ulitsa Kulakova 14 [Moskva],55.8089341,37.39553,500
+103,Grocery Store,SPAR Podmoskovnyy bul'var 5 [Krasnogorsk],55.8210909,37.36763,500
+104,Grocery Store,SPAR Pyatnitskoye shosse 43 [Moskva],55.8572893,37.35053,500
+105,Grocery Store,SPAR prospekt Mel'nikova 10 [Chimki],55.9027709,37.40463,500
+106,Grocery Store,SPAR Festival'naya ulitsa 8 [Moskva],55.8587618,37.4920199,500
+107,Grocery Store,SPAR Chasovaya ulitsa 16 str 1 [Moskva],55.8090015,37.5302999,500
+108,Grocery Store,SPAR ulitsa Grizdubovoy 2 [Moskva],55.7826088,37.53183,500
+109,Grocery Store,SPAR ulitsa Pravdy 4 [Moskva],55.7833979,37.57668,500
+110,Grocery Store,SPAR Leningradskiy prospekt 1 [Moskva],55.7777564,37.58037,500
+111,Grocery Store,SPAR Dolgorukovskaya ulitsa 2 [Moskva],55.7743929,37.60455,500
+112,Grocery Store,SPAR Tsvetnoy bul'var 11 str 2 [Moskva],55.7701158,37.62042,500
+113,Grocery Store,SPAR Strastnoy bul'var 4 [Moskva],55.7653449,37.60776,500
+114,Grocery Store,SPAR Tverskaya ulitsa 9 [Moskva],55.7597539,37.61065,500
+115,Grocery Store,SPAR Manezhnaya ploshchad 1 str 2 [Moskva],55.7557979,37.6146,500
+116,Grocery Store,SPAR ulitsa Maroseyka 9/2 str 1 [Moskva],55.7577579,37.63434,500
+117,Grocery Store,SPAR ulitsa Bol'shaya Lubyanka 12/1 [Moskva],55.7618704,37.62841,500
+118,Pharmacy,Apteka Sotsialnaya Apteka; ulitsa Kutaisskaya 3 [Kaliningrad],54.7097094,20.57893,1000
+119,Pharmacy,Apteka Rigla; ulitsa Aksakova 125 [Kaliningrad],54.7115165,20.57924,1000
+120,Pharmacy,Apteka Planeta Zdorovya; ulitsa Aksakova 129 [Kaliningrad],54.7115766,20.58093,1000
+121,Pharmacy,Zdravsiti; ulitsa Aksakova 133 [Kaliningrad],54.7119413,20.58276,1000
+122,Pharmacy,Apteka Rigla; Kaliningradskaya ulitsa 5 [Chernyakhovskiy rayon],54.6358981,21.80611,500
+123,Pharmacy,Apteka Bud Zdorov; ulitsa Kaliningradskaya 2 [Chernyakhovskiy rayon],54.6371483,21.80793,500
+124,Pharmacy,Apteka Linia Zhisniy; ulitsa Chernyakhovskogo 34 [Nesterovskiy rayon],54.629358,22.5736,500
+125,Cafe,McDonald's 37 Tallinna mnt [EST-Narva],59.3802799,28.17738,500
+126,Cafe,McDonald's [RUS-Al'met'evsk],54.9042772,52.30537,500
+127,Cafe,McDonald's [RUS-Altuf'evo],55.8982482,37.5884,500
+128,Cafe,McDonald's [RUS-Annino],55.58388,37.59922,500
+129,Cafe,McDonald's [RUS-Arbat],55.7474301,37.58448,500
+130,Cafe,McDonald's [RUS-Balashikha],55.7936781,37.93635,500
+131,Cafe,McDonald's [RUS-Belaya Dacha],55.6545794,37.84417,500
+132,Cafe,McDonald's [RUS-Belyaevo],55.6410422,37.53035,500
+133,Cafe,McDonald's [RUS-Borovskoye],55.6384098,37.3516,500
+134,Cafe,McDonald's [RUS-Bratislavskaya],55.6601971,37.75127,500
+135,Cafe,McDonald's [RUS-Budenovskiy],47.2198249,39.70781,500
+136,Cafe,McDonald's [RUS-Butovo],55.5664066,37.57305,500
+137,Cafe,McDonald's [RUS-Butyrskaya],55.8043167,37.58197,500
+138,Cafe,McDonald's [RUS-Chasovaya],55.8084443,37.52803,500
+139,Cafe,McDonald's [RUS-Cheboksary],56.14397,47.24678,500
+140,Cafe,McDonald's [RUS-Cherkizovo],55.8027735,37.75557,500
+141,Cafe,McDonald's [Санкт-Петербург],59.9872199,30.30289,500
+142,Cafe,McDonald's [RUS-Chertanovo],55.6331208,37.62392,500
+143,Cafe,McDonald's [RUS-Dmitrov],56.348767,37.52008,500
+144,Cafe,McDonald's [RUS-Dmitrovskoye],55.8641347,37.54826,500
+145,Cafe,McDonald's [RUS-Dobryninskaya],55.7290231,37.62373,500
+146,Cafe,McDonald's [RUS-Domodedovskaya],55.612215,37.71795,500
+147,Cafe,McDonald's [RUS-Dorogomilovskaya],55.7458743,37.56614,500
+148,Cafe,McDonald's [RUS-Elektrostal'],55.7696734,38.43443,500
+149,Cafe,McDonald's [RUS-Elektrozavodskaya],55.7819679,37.70656,500
+150,Cafe,проспект Энгельса 116 [Санкт-Петербург],60.035251,30.32108,500
+151,Cafe,McDonald's [RUS-Entuziastov],55.7757704,37.83576,500
+152,Cafe,McDonald's [RUS-Frunzenskaya],55.7273253,37.58037,500
+153,Cafe,McDonald's [RUS-Gazetnyy],55.7589333,37.61088,500
+154,Cafe,McDonald's [RUS-Gipertsentr],55.865602,37.7047,500
+155,Cafe,McDonald's [RUS-Gol'yanovo],55.8224462,37.8233,500
+156,Cafe,McDonald's [RUS-Grazhdanskiy],60.0110803,30.39719,500
+157,Cafe,McDonald's [RUS-Kaluzhskaya],55.6567001,37.5425899,500
+158,Cafe,McDonald's [Санкт-Петербург],59.9668703,30.31121,500
+159,Cafe,McDonald's [RUS-Kashirskoye],55.6213272,37.71397,500
+160,Cafe,McDonald's [RUS-Katukova],55.8070975,37.4090599,500
+161,Cafe,McDonald's [RUS-Kazan'],55.8254536,49.13456,500
+162,Cafe,McDonald's [RUS-Khimki],55.9049518,37.41631,500
+163,Cafe,McDonald's [RUS-Klin],56.3322307,36.72849,500
+164,Cafe,McDonald's [RUS-Kolomenskaya],55.6675773,37.65846,500
+165,Cafe,McDonald's [RUS-Kolomna],55.0965299,38.76317,500
+166,Cafe,McDonald's Коломяжский проспект 19/2 [Санкт-Петербург],60.0082652,30.29779,500
+167,Cafe,McDonald's [RUS-Komendatskiy],60.0064529,30.26118,500
+168,Cafe,McDonald's [RUS-Kosmonavtov],59.851678,30.35088,500
+169,Cafe,McDonald's [RUS-Kosmonavtov],47.2845982,39.71702,500
+170,Cafe,McDonald's [RUS-Krasnaya Presnya],55.76259,37.56351,500
+171,Cafe,McDonald's [RUS-Krasnoarmeyskaya],59.9164256,30.30861,500
+172,Cafe,McDonald's [RUS-Krasnodar],45.1004666,38.98369,500
+173,Cafe,McDonald's [RUS-Krasnogorsk],55.8293293,37.30608,500
+174,Cafe,McDonald's [RUS-Kuz'minki],55.7061149,37.76699,500
+175,Cafe,McDonald's [RUS-Ladozhskaya],55.7714759,37.68117,500
+176,Cafe,McDonald's [RUS-Leningradskoye],55.8656037,37.46201,500
+177,Cafe,McDonald's [RUS-Leninskiy],55.6622988,37.50859,500
+178,Cafe,McDonald's [RUS-Lesnoy Gorodok],55.6325013,37.21183,500
+179,Cafe,McDonald's [RUS-Lianozovo],55.9017136,37.54833,500
+180,Cafe,McDonald's [RUS-Lyubertsy],55.6810315,37.88806,500
+181,Cafe,McDonald's [RUS-Manezh],55.7556794,37.61518,500
+182,Cafe,McDonald's [RUS-Mar'ino],55.6497845,37.7446399,500
+183,Cafe,McDonald's [RUS-Marata],59.9193372,30.3395,500
+184,Cafe,McDonald's [RUS-Maroseyka],55.7577981,37.63494,500
+185,Cafe,McDonald's [RUS-Matveevskaya],55.7038237,37.45893,500
+186,Cafe,McDonald's [RUS-Medvedkovo],55.8879214,37.66264,500
+187,Cafe,McDonald's [RUS-Mega],55.604444,37.49221,500
+188,Cafe,McDonald's [RUS-Mega],55.9108661,37.39616,500
+189,Cafe,McDonald's [RUS-Milashenkova],55.8229686,37.58854,500
+190,Cafe,McDonald's [RUS-Mitino],55.8476934,37.36106,500
+191,Cafe,McDonald's [RUS-MKAD 24km],55.5862825,37.7194999,500
+192,Cafe,McDonald's [RUS-MKAD 48km],55.659136,37.42989,500
+193,Cafe,McDonald's [RUS-Molodezhnaya],55.7384059,37.41068,500
+194,Cafe,McDonald's [RUS-Morskaya],59.9355938,30.31676,500
+195,Cafe,McDonald's [RUS-Moskovskiy],59.8492531,30.32065,500
+196,Cafe,McDonald's [RUS-Moskva],55.7307789,37.73107,500
+197,Cafe,McDonald's [RUS-Moskva],55.7773697,37.5202699,500
+198,Cafe,McDonald's [RUS-Mozhayskoye],55.7166656,37.4090599,500
+199,Cafe,McDonald's [RUS-Myasnitskaya],55.7653383,37.63847,500
+200,Cafe,McDonald's [RUS-Mytischi],55.9115125,37.77803,500
+201,Cafe,McDonald's [RUS-Mytischi],55.8910837,37.74345,500
+202,Cafe,McDonald's [RUS-N-Novgorod],56.3214085,43.94695,500
+203,Cafe,McDonald's [RUS-Naberezhyye Chelny],55.7455135,52.4222899,500
+204,Cafe,McDonald's [RUS-Naro-Fominsk],55.3880862,36.73992,500
+205,Cafe,McDonald's [RUS-Nizhniy Novgorod],56.3154614,43.99122,500
+206,Cafe,McDonald's [RUS-Noginsk],55.8524229,38.4413399,500
+207,Cafe,McDonald's [RUS-Novatorov],59.8507114,30.26732,500
+208,Cafe,McDonald's [RUS-Novocherkassk],47.4110606,40.10363,500
+209,Cafe,McDonald's [RUS-Novoryazanskoye],55.6682716,37.87116,500
+210,Cafe,McDonald's [RUS-Novoslobodskaya],55.7795098,37.6012,500
+211,Cafe,McDonald's [RUS-Oblaka],55.6122612,37.73161,500
+212,Cafe,McDonald's [RUS-Odintsovo],55.6838307,37.29475,500
+213,Cafe,McDonald's [RUS-Olimpiyskaya derevnya],55.6760254,37.4666,500
+214,Cafe,McDonald's [RUS-Orekhovo-Zuevo],55.8066844,38.98318,500
+215,Cafe,McDonald's [RUS-Orenburg],51.769751,55.10231,500
+216,Cafe,McDonald's [RUS-Otradnoye],55.8631417,37.60189,500
+217,Cafe,McDonald's [RUS-Podol'sk],55.4354003,37.54942,500
+218,Cafe,McDonald's [RUS-Podol'sk],55.4199611,37.54876,500
+219,Cafe,McDonald's [RUS-Pravoberezhnaya],55.8805341,37.4494,500
+220,Cafe,McDonald's [RUS-Prazhskaya],59.8632008,30.40361,500
+221,Cafe,Лахтинский проспект 85Б [Санкт-Петербург],59.9944832,30.14784,500
+222,Cafe,McDonald's [RUS-Prishvina],55.8855797,37.60222,500
+223,Cafe,McDonald's [RUS-Prospekt Mira],55.780978,37.6327799,500
+224,Cafe,McDonald's [RUS-Pushkino],55.9953049,37.86735,500
+225,Cafe,McDonald's [RUS-Pushkinskaya],55.7649133,37.60328,500
+226,Cafe,McDonald's [RUS-Pushkinskaya],47.2255004,39.71803,500
+227,Cafe,McDonald's [RUS-Ramenskoe],55.5677141,38.23134,500
+228,Cafe,McDonald's [RUS-Reutov],55.7461351,37.86282,500
+229,Cafe,McDonald's [RUS-Ryazanskiy],55.7180012,37.78514,500
+230,Cafe,McDonald's [RUS-Samara],53.2047033,50.12351,500
+231,Cafe,McDonald's улица Савушкина 119А [Санкт-Петербург],59.986187,30.2276,500
+232,Cafe,McDonald's [RUS-Schelkovo],55.9246624,37.99895,500
+233,Cafe,McDonald's [RUS-Sennaya],59.926245,30.31871,500
+234,Cafe,McDonald's [RUS-Sergiyev Posad],56.3144001,38.13697,500
+235,Cafe,McDonald's [RUS-Sheremet'evskaya],55.803396,37.61864,500
+236,Cafe,McDonald's [RUS-Shukinskaya],55.8096592,37.46345,500
+237,Cafe,McDonald's [RUS-Slavy],59.8560667,30.38236,500
+238,Cafe,McDonald's [RUS-Sokol'niki],55.7890174,37.68127,500
+239,Cafe,McDonald's [RUS-Solnechnogorsk],56.1883199,36.97718,500
+240,Cafe,McDonald's [RUS-Sredniy],59.9433437,30.27874,500
+241,Cafe,McDonald's [RUS-Sukharevskaya],55.7722091,37.63165,500
+242,Cafe,McDonald's [RUS-Svobodnyy],55.7502033,37.81733,500
+243,Cafe,McDonald's [RUS-Tret'yakovskaya],55.7410527,37.62532,500
+244,Cafe,McDonald's [RUS-Troitsk],55.4738917,37.31115,500
+245,Cafe,McDonald's [RUS-Tul'skaya],55.7102858,37.6208699,500
+246,Cafe,McDonald's [RUS-Tushino],55.824759,37.4362799,500
+247,Cafe,McDonald's [RUS-Tyumen'],57.1520951,65.53802,500
+248,Cafe,McDonald's [RUS-Ufa],54.7795273,56.03205,500
+249,Cafe,McDonald's [RUS-Varshavskaya],55.6538766,37.62043,500
+250,Cafe,McDonald's [RUS-Vavilova],55.682941,37.54974,500
+251,Cafe,McDonald's [RUS-Venevskaya],55.5477866,37.5431,500
+252,Cafe,McDonald's [RUS-Veymart],55.8585433,37.3952699,500
+253,Cafe,McDonald's [RUS-Volgograd],48.6976047,44.49982,500
+254,Cafe,McDonald's [RUS-Volgogradskiy],55.7270602,37.67971,500
+255,Cafe,McDonald's [RUS-Voronezh],51.7069488,39.17301,500
+256,Cafe,McDonald's [RUS-VVTs],55.8277478,37.6426299,500
+257,Cafe,McDonald's [RUS-Yaroslavkoye],55.85153,37.67619,500
+258,Cafe,McDonald's [RUS-Yaroslavl'],57.5995439,39.87451,500
+259,Cafe,McDonald's [RUS-Yaroslavl'],57.6258022,39.86867,500
+260,Cafe,McDonald's [RUS-Yekaterinburg],56.8239718,60.50474,500
+261,Cafe,McDonald's [RUS-Yugo-Zapadnaya],55.6642652,37.48099,500
+262,Cafe,McDonald's [RUS-Yuzhnaya],55.6226118,37.60607,500
+263,Cafe,McDonald's [RUS-Zagorodnyy],59.9212474,30.32974,500
+264,Cafe,McDonald's [RUS-Zelenograd],56.0144083,37.20512,500
+265,Cafe,McDonald's [RUS-Zhukova],55.7751075,37.47886,500
+266,Cafe,McDonald's [RUS-Zhukova],59.8584402,30.22847,500
+267,Cafe,McDonald's [RUS-Zorge],55.7490482,49.2091,500
+268,Cafe,McDonalds [Санкт-Петербург],60.0035662,30.22835,500
+269,Cafe,McDonald's Носовихинское шоссе 45 [Реутов],55.7522884,37.88774,500
+270,Cafe,McDonald's Носовихинское шоссе 4 [Балашиха],55.7500398,37.88711,500
+271,Cafe,McDonald's [Москва],55.7548595,37.84311,500
+272,Cafe,McDonald's улица Кирова 27 [Подольск],55.4258651,37.53063,500
+273,Cafe,McDonald's [Калининград],54.7181744,20.50096,500
+274,Cafe,McDonald's площадь Калинина 26 [Калининград],54.69518,20.5004199,500
+275,Cafe,McDonald's Советский проспект 4В [Калининград],54.7218736,20.49954,500
+276,Cafe,McDonald's Moskovskiy prospekt [Kaliningrad],54.7062619,20.59014,500
+277,Hospital,Central Pediatric Clinic [RUS-Moscow],55.7912186,37.60564,500
+278,Hospital,Child Neurology [RUS-Moscow],55.8692589,37.5214799,500
+279,Hospital,Clinical Centre [RUS-Desnogorsk],54.1536891,33.29933,500
+280,Hospital,Clinical Centre [RUS-Moscow],55.8800604,37.49231,500
+281,Hospital,Clinical Centre [RUS-Moscow],55.7357653,37.58068,500
+282,Hospital,Clinical Centre [RUS-Moscow],55.7430699,37.6450699,500
+283,Hospital,Clinical Centre [RUS-Moscow],55.756127,37.62571,500
+284,Hospital,Clinical Centre [RUS-Moscow],55.8766927,37.5185,500
+285,Hospital,Clinical Centre [RUS-Moscow],55.8653889,37.5388,500
+286,Hospital,Hospital [RUS-Moscow],55.7219319,37.43129,500
+287,Hospital,Maternity Centre [RUS-Moscow],55.8743384,37.66071,500
+288,Hospital,Pediatric Clinic [RUS-Govorovo],55.6433638,37.40499,500
+289,Hospital,Pediatric Clinic [RUS-Lyuberts],55.7152278,37.85417,500
+290,Hospital,Pediatric Clinic [RUS-Moscow],55.8166299,37.8030199,500
+291,Hospital,Pediatric Clinic [RUS-Moscow],55.816952,37.71306,500
+292,Hospital,Pediatric Clinic [RUS-Moscow],55.7234718,37.40055,500
+293,Hospital,Pediatric Clinic [RUS-Moscow],55.6821127,37.49603,500
+294,Hospital,Pediatric Clinic [RUS-Moscow],55.7364571,37.47547,500
+295,Hospital,Pediatric Clinic [RUS-Moscow],55.7101403,37.39448,500
+296,Hospital,Pediatric Clinic [RUS-Moscow],55.7848378,37.73271,500
+297,Hospital,Pediatric Clinic [RUS-Moscow],55.7125324,37.51399,500
+298,Hospital,Pediatric Clinic [RUS-Moscow],55.6785863,37.44843,500
+299,Hospital,Pediatric Clinic [RUS-Moscow],55.7194868,37.45862,500
+300,Hospital,Pediatric Clinic [RUS-Moscow],55.7609471,37.83319,500
+301,Hospital,Pediatric Clinic [RUS-Moscow],55.7896408,37.69478,500
+302,Hospital,Pediatric Clinic [RUS-Moscow],55.7232616,37.82237,500
+303,Hospital,Pediatric Clinic [RUS-Moscow],55.7418572,37.41305,500
+304,Hospital,Pediatric Clinic [RUS-Moscow],55.8099583,37.81414,500
+305,Hospital,Pediatric Clinic [RUS-Moscow],55.7554794,37.78352,500
+306,Hospital,Pediatric Clinic [RUS-Moscow],55.8222659,37.75524,500
+307,Hospital,Pediatric Clinic [RUS-Moscow],55.8136838,37.5745099,500
+308,Hospital,Pediatric Clinic [RUS-Moscow],55.7639161,37.47891,500
+309,Hospital,Pediatric Clinic [RUS-Moscow],55.8021515,37.54168,500
+310,Hospital,Pediatric Clinic [RUS-Moscow],55.7765345,37.8289,500
+311,Hospital,Pediatric Clinic [RUS-Moscow],55.7625238,37.40599,500
+312,Hospital,Pediatric Clinic [RUS-Moscow],55.7888972,37.78364,500
+313,Hospital,Pediatric Clinic [RUS-Moscow],55.6642039,37.4891999,500
+314,Hospital,Pediatric Clinic [RUS-Moscow],55.7495343,37.81292,500
+315,Hospital,Pediatric Clinic [RUS-Moscow],55.7483473,37.4236999,500
+316,Hospital,Pediatric Clinic [RUS-Moscow],55.790158,37.77499,500
+317,Hospital,Pediatric Clinic [RUS-Moscow],55.779696,37.51785,500
+318,Hospital,Pediatric Clinic [RUS-Moscow],55.8552823,37.50103,500
+319,Hospital,Pediatric Clinic [RUS-Moscow],55.7475242,37.79703,500
+320,Hospital,Pediatric Clinic [RUS-Moscow],55.7127179,37.4793499,500
+321,Hospital,Pediatric Clinic [RUS-Moscow],55.8185156,37.50268,500
+322,Hospital,Pediatric Clinic [RUS-Moscow],55.8015784,37.56554,500
+323,Hospital,Pediatric Clinic [RUS-Moscow],55.7374275,37.5294,500
+324,Hospital,Pediatric Clinic [RUS-Moscow],55.7999763,37.72751,500
+325,Hospital,Pediatric Clinic [RUS-Moscow],55.8033805,37.49669,500
+326,Hospital,Pediatric Clinic [RUS-Moscow],55.7389874,37.82983,500
+327,Hospital,Pediatric Clinic [RUS-Moscow],55.8122637,37.79088,500
+328,Hospital,Pediatric Clinic [RUS-Raskazovka],55.6393554,37.36511,500
+329,Hospital,Pediatric Clinic [RUS-Reutov],55.7348266,37.86235,500
+330,Hospital,Pediatric Clinic [RUS-Reutov],55.7419156,37.86888,500
+331,Hospital,Pediatric Stomatology [RUS-Moscow],55.6129314,37.70669,500
+332,ATM,ATM [RUS-Istra],55.9199519,36.85748,500
+333,ATM,ATM [RUS-Odintsovo],55.6797268,37.26588,500
+334,ATM,ATM [RUS-Raskazovka],55.6393734,37.34346,500
+335,ATM,ATM [RUS-Raskazovka],55.6355757,37.34398,500
+336,ATM,ATM [RUS-Rozhdestveno],55.8571007,37.35043,500
+337,ATM,ATM [RUS-Rozhdestveno],55.8532086,37.35205,500
+338,ATM,ATM [RUS-Orlovo],55.6503731,37.39417,500
+339,ATM,ATM [RUS-Sosnovka],55.755744,37.40991,500
+340,ATM,ATM [RUS-Moscow],55.7399921,37.4178,500
+341,ATM,ATM [RUS-Moscow],55.7277681,37.44357,500
+342,ATM,ATM [RUS-Moscow],55.8780755,37.4473399,500
+343,ATM,ATM [RUS-Moscow],55.8292416,37.45153,500
+344,ATM,ATM [RUS-Moscow],55.7883831,37.46695,500
+345,ATM,ATM [RUS-Moscow],55.7943967,37.49326,500
+346,ATM,ATM [RUS-Moscow],55.6766483,37.4966099,500
+347,ATM,ATM [RUS-Moscow],55.8198088,37.49877,500
+348,ATM,ATM [RUS-Moscow],55.8031309,37.51961,500
+349,ATM,ATM [RUS-Moscow],55.6916912,37.53512,500
+350,ATM,ATM [RUS-Moscow],55.6565981,37.53882,500
+351,ATM,ATM [RUS-Ilyinskiy],55.9148578,37.54095,500
+352,ATM,ATM [RUS-Moscow],55.6920289,37.55103,500
+353,ATM,ATM [RUS-Moscow],55.7446604,37.5538,500
+354,ATM,ATM [RUS-Moscow],55.7650099,37.5572,500
+355,ATM,ATM [RUS-Moscow],55.7442593,37.56584,500
+356,ATM,ATM [RUS-Moscow],55.7420997,37.56803,500
+357,ATM,ATM [RUS-Moscow],55.7857735,37.56913,500
+358,ATM,ATM [RUS-Moscow],55.739725,37.5757,500
+359,ATM,ATM [RUS-Moscow],55.7215653,37.5766,500
+360,ATM,ATM [RUS-Moscow],55.7599767,37.57725,500
+361,ATM,ATM [RUS-Moscow],55.7535465,37.57756,500
+362,ATM,ATM [RUS-Moscow],55.7449793,37.58388,500
+363,ATM,ATM [RUS-Moscow],55.798904,37.58504,500
+364,ATM,ATM [RUS-Moscow],55.710605,37.58571,500
+365,ATM,ATM [RUS-Moscow],55.8484957,37.58984,500
+366,ATM,ATM [RUS-Moscow],55.7357306,37.5957999,500
+367,ATM,ATM [RUS-Moscow],55.7569919,37.5959,500
+368,ATM,ATM [RUS-Moscow],55.7701794,37.59908,500
+369,ATM,ATM [RUS-Moscow],55.7873736,37.60055,500
+370,ATM,ATM [RUS-Moscow],55.7517629,37.60204,500
+371,ATM,ATM [RUS-Moscow],55.6634152,37.60798,500
+372,ATM,ATM [RUS-Moscow],55.6200546,37.6097899,500
+373,ATM,ATM [RUS-Moscow],55.7623609,37.60977,500
+374,ATM,ATM [RUS-Moscow],55.7517324,37.6132599,500
+375,ATM,ATM [RUS-Moscow],55.7631309,37.61723,500
+376,ATM,ATM [RUS-Moscow],55.8028666,37.61746,500
+377,ATM,ATM [RUS-Moscow],55.6538669,37.61769,500
+378,ATM,ATM [RUS-Moscow],55.7371379,37.61854,500
+379,ATM,ATM [RUS-Moscow],55.7611635,37.62238,500
+380,ATM,ATM [RUS-Moscow],55.7624984,37.62413,500
+381,ATM,ATM [RUS-Moscow],55.7592568,37.62505,500
+382,ATM,ATM [RUS-Moscow],55.7405232,37.62594,500
+383,ATM,ATM [RUS-Moscow],55.7189153,37.62708,500
+384,ATM,ATM [RUS-Moscow],55.7818301,37.63295,500
+385,ATM,ATM [RUS-Moscow],55.7927426,37.63642,500
+386,ATM,ATM [RUS-Moscow],55.8117171,37.63974,500
+387,ATM,ATM [RUS-Moscow],55.8219927,37.64544,500
+388,ATM,ATM [RUS-Moscow],55.6541694,37.64762,500
+389,ATM,ATM [RUS-Moscow],55.8773517,37.65162,500
+390,ATM,ATM [RUS-Moscow],55.8698707,37.6572699,500
+391,ATM,ATM [RUS-Moscow],55.7617363,37.65808,500
+392,ATM,ATM [RUS-Moscow],55.5818521,37.6581,500
+393,ATM,ATM [RUS-Moscow],55.8572628,37.65855,500
+394,ATM,ATM [RUS-Moscow],55.7587371,37.65865,500
+395,ATM,ATM [RUS-Moscow],55.7559129,37.65935,500
+396,ATM,ATM [RUS-Moscow],55.7589403,37.65985,500
+397,ATM,ATM [RUS-Moscow],55.8880849,37.66125,500
+398,ATM,ATM [RUS-Moscow],55.7316611,37.66722,500
+399,ATM,ATM [RUS-Moscow],55.7307038,37.67448,500
+400,ATM,ATM [RUS-Moscow],55.7892328,37.68007,500
+401,ATM,ATM [RUS-Moscow],55.7734879,37.68143,500
+402,ATM,ATM [RUS-Moscow],55.7067678,37.68493,500
+403,ATM,ATM [RUS-Moscow],55.7838797,37.69297,500
+404,ATM,ATM [RUS-Moscow],55.8045128,37.71405,500
+405,ATM,ATM [RUS-Moscow],55.6917852,37.72863,500
+406,ATM,ATM [RUS-Moscow],55.8154589,37.73365,500
+407,ATM,ATM [RUS-Moscow],55.6503909,37.7440799,500
+408,ATM,ATM [RUS-Moscow],55.7884106,37.74921,500
+409,ATM,ATM [RUS-Moscow],55.6587739,37.7502,500
+410,ATM,ATM [RUS-Moscow],55.6764477,37.76108,500
+411,ATM,ATM [RUS-Moscow],55.7600734,37.77255,500
+412,ATM,ATM [RUS-Novorossiysk],44.7188114,37.77784,500
+413,ATM,ATM [RUS-Moscow],55.7972846,37.78279,500
+414,ATM,ATM [RUS-Moscow],55.810749,37.79711,500
+415,ATM,ATM [RUS-Moscow],55.7156429,37.79765,500
+416,ATM,ATM [RUS-Moscow],55.7936899,37.79798,500
+417,ATM,ATM [RUS-Moscow],55.8081831,37.79924,500
+418,ATM,ATM [RUS-Volgograd],48.7586507,44.5014899,500
+419,ATM,ATM [RUS-Volgograd],48.7167889,44.50944,500
+420,ATM,ATM [RUS-Volgograd],48.7038072,44.51565,500
+421,ATM,ATM [RUS-Volgograd],48.7070011,44.51814,500
+422,ATM,ATM [RUS-Volgograd],48.7095408,44.52039,500
+423,ATM,ATM [RUS-Volgograd],48.7253105,44.53686,500
+424,ATM,ATM [RUS-Zhirnovsk],50.9786259,44.77666,500
+425,ATM,ATM [RUS-Zhirnovsk],50.9737094,44.78252,500
+426,Bank,Bank [RUS-Kaliningrad],54.7164212,20.5045499,500
+427,Bank,Bank [RUS-Kaliningrad],54.720346,20.5122399,500
+428,Bank,Bank [RUS-Zelenogorsk],60.197195,29.70582,500
+429,Bank,Bank [RUS-Vishniy Volochek],57.5890427,34.55583,500
+430,Bank,Bank [RUS-Zvenigorod],55.73208,36.85503,500
+431,Bank,Bank [RUS-Istra],55.9138556,36.8587,500
+432,Bank,Bank [RUS-Golicino],55.6298615,37.00668,500
+433,Bank,Bank [RUS-Rogachevo],56.4281771,37.17969,500
+434,Bank,Bank [RUS-Moscow],55.7852892,37.3574,500
+435,Bank,Bank [RUS-Serpuchov],54.9127213,37.41661,500
+436,Bank,Bank [RUS-Moscow],55.7215944,37.43753,500
+437,Bank,Bank [RUS-Moscow],55.8320455,37.48757,500
+438,Bank,Bank [RUS-Moscow],55.6736868,37.48825,500
+439,Bank,Bank [RUS-Moscow],55.6562294,37.4955799,500
+440,Bank,Bank [RUS-Moscow],55.8081477,37.51329,500
+441,Bank,Bank [RUS-Moscow],55.7400985,37.53102,500
+442,Bank,Bank [RUS-Moscow],55.7987691,37.53713,500
+443,Bank,Bank [RUS-Moscow],55.6189651,37.54383,500
+444,Bank,Bank [RUS-Moscow],55.6655975,37.54506,500
+445,Bank,Bank [RUS-Moscow],55.7947407,37.54798,500
+446,Bank,Bank [RUS-Moscow],55.7469868,37.55589,500
+447,Bank,Bank [RUS-Moscow],55.7192693,37.57186,500
+448,Bank,Bank [RUS-Sherbinka],55.5104832,37.57438,500
+449,Bank,Bank [RUS-Moscow],55.7090359,37.59782,500
+450,Bank,Bank [RUS-Moscow],55.7216842,37.60148,500
+451,Bank,Bank [RUS-Moscow],55.7254498,37.62159,500
+452,Bank,Bank [RUS-Moscow],55.7220313,37.62713,500
+453,Bank,Bank [RUS-Moscow],55.7424426,37.62856,500
+454,Bank,Bank [RUS-Moscow],55.7370801,37.63095,500
+455,Bank,Bank [RUS-Moscow],55.7787564,37.72658,500
+456,Bank,Bank [RUS-Moscow],55.659076,37.74696,500
+457,Bank,Bank [RUS-Moscow],55.6600173,37.75348,500
+458,Bank,Bank [RUS-Novorossisk],44.7222328,37.77073,500
+459,Bank,Bank [RUS-Pyatigorsk],44.0586733,43.06026,500
+460,Bank,Bank [RUS-Volgograd],48.7683176,44.4984899,500
+461,Bank,Bank [RUS-Volgograd],48.7468091,44.50194,500
+462,Bank,Bank [RUS-Volgograd],48.7180393,44.50728,500
+463,Bank,Bank [RUS-Volgograd],48.7169416,44.50903,500
+464,Bank,Bank [RUS-Volgograd],48.7038561,44.5135,500
+465,Bank,Bank [RUS-Volgograd],48.7036929,44.51554,500
+466,Bank,Bank [RUS-Volgograd],48.7080175,44.51797,500
+467,Bank,Bank [RUS-Volgograd],48.7175816,44.52679,500
